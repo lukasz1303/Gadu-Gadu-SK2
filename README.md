@@ -1,0 +1,1 @@
+# Gadu-Gadu-SK2
