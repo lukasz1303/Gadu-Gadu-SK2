@@ -1,14 +1,11 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QMdiSubWindow>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
-    ui(new Ui::MainWindow),
-    tcpSocket(new QTcpSocket(this))
+    ui(new Ui::MainWindow)
 {
-    connect(tcpSocket, &QIODevice::readyRead, this,&MainWindow::readData);
-    typedef void (QAbstractSocket::*QAbstractSocketErrorSignal)(QAbstractSocket::SocketError);
-    connect(tcpSocket, static_cast<QAbstractSocketErrorSignal>(&QAbstractSocket::error), this, &MainWindow::displayError);
     ui->setupUi(this);
     ui->plainTextEdit->setPlaceholderText("Wprowadz wiadomosc");
 }
@@ -18,15 +15,10 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
-void MainWindow::on_pushButton_clicked()
+void MainWindow::setSocket(QTcpSocket *socket)
 {
-    qDebug() << ui->plainTextEdit->toPlainText();
-    tcpSocket->connectToHost("127.0.0.1", 1234);
-}
-
-void MainWindow::displayError(QAbstractSocket::SocketError socketError){
-    qDebug() << socketError;
+     tcpSocket = socket;
+     connect(tcpSocket, &QIODevice::readyRead, this,&MainWindow::readData);
 }
 
 void MainWindow::readData(){
@@ -38,10 +30,25 @@ void MainWindow::readData(){
     ui->textBrowser->insertPlainText("\n");
 }
 
-void MainWindow::on_pushButton_2_clicked()
+
+void MainWindow::on_pushButton_clicked()
+{
+    qDebug() << ui->plainTextEdit->toPlainText();
+}
+
+void MainWindow::displayError(QAbstractSocket::SocketError socketError){
+    qDebug() << socketError;
+}
+
+void MainWindow::on_sendButton_clicked()
 {
     tcpSocket->write(ui->plainTextEdit->toPlainText().toLatin1().data());
     ui->textBrowser->insertPlainText(ui->plainTextEdit->toPlainText());
     ui->textBrowser->insertPlainText("\n");
     ui->plainTextEdit->clear();
+}
+
+void MainWindow::on_pushButton_3_clicked()
+{
+    close();
 }
