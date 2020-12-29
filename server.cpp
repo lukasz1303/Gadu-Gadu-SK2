@@ -11,6 +11,9 @@
 #include <string.h>
 #include <time.h>
 #include <pthread.h>
+#include <fstream>
+#include <iostream>
+#include <string>
 
 #define SERVER_PORT 1234
 #define QUEUE_SIZE 5
@@ -48,6 +51,7 @@ void *ThreadBehavior(void *t_data)
     struct thread_data_t *th_data = (struct thread_data_t*)t_data;
     char buff[255];
     int bytes;
+
     while(1){
     
         memset(buff,0,sizeof(buff));
@@ -58,8 +62,23 @@ void *ThreadBehavior(void *t_data)
         }
         printf("read %d bytes\n", bytes);
         printf("%s\n", buff);
-    
         
+        if(strncmp(buff,"SIGN_UP",7)==0){
+            std::fstream usersFile;
+            usersFile.open("users", std::ios_base::app);
+            
+            if (usersFile.is_open()){
+                std::string s = buff;
+                usersFile << s.substr(s.find(":")+1) << std::endl;
+                usersFile.close();
+                char ret[10] = "OK";
+                write((*th_data).socket, ret, strlen(ret));
+            } else {
+                printf("Nie można otworzyć pliku \"users\"\n");
+            }
+        }
+        
+            
         send_message(buff, (*th_data).socket);
     }
     free(t_data);

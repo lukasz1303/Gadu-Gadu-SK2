@@ -53,8 +53,8 @@ void LoginWindow::on_signInButton_clicked()
     }
     else
     {
-        badlogindialog = new BadLoginDialog(this);
-        badlogindialog->show();
+        infoDialog = new InfoDialog(this);
+        infoDialog->show();
     }
 
 }
@@ -62,6 +62,7 @@ void LoginWindow::on_signInButton_clicked()
 void LoginWindow::on_signUpButton_clicked()
 {
     signUpWindow = new SignUpWindow(this);
+    disconnect(tcpSocket,&QIODevice::readyRead,0,0);
     signUpWindow->setSocket(tcpSocket);
     signUpWindow->show();
 }

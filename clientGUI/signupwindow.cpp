@@ -26,25 +26,44 @@ void SignUpWindow::on_signUpButton_clicked()
     {
         msg.append(ui->loginTextEdit->toPlainText());
         msg.append(":");
-        msg.append(ui->nrGGTextEdit->toPlainText());
-        msg.append(":");
         msg.append(ui->passTextEdit->toPlainText());
+        msg.append(":");
+        msg.append(ui->nrGGTextEdit->toPlainText());
         tcpSocket->write(msg.toLatin1());
+
     }
     else if (re2.indexIn(nrGG)>=0)
     {
-        badlogindialog = new BadLoginDialog(this);
-        badlogindialog->setLabelText("Nr Gadu-Gadu musi składać się wyłącznie z cyfr");
-        badlogindialog->show();
+        infoDialog = new InfoDialog(this);
+        infoDialog->setLabelText("Nr Gadu-Gadu musi składać się wyłącznie z cyfr");
+        infoDialog->show();
     }
     else
     {
-        badlogindialog = new BadLoginDialog(this);
-        badlogindialog->show();
+        infoDialog = new InfoDialog(this);
+        infoDialog->show();
     }
 }
 
 void SignUpWindow::setSocket(QTcpSocket *socket)
 {
     tcpSocket = socket;
+    connect(tcpSocket, &QIODevice::readyRead, this,&SignUpWindow::readData);
+}
+
+void SignUpWindow::readData(){
+    int n = tcpSocket->readLine(buf,100);
+    buf[n] = 0;
+
+    if (strcmp(buf, "OK") == 0){
+        infoDialog = new InfoDialog(this);
+        infoDialog->setLabelText("Rejestracja zakończona pomyślnie");
+        hide();
+        infoDialog->show();
+    } else {
+        infoDialog = new InfoDialog(this);
+        infoDialog->setLabelText("Rejestracja zakończona niepowodzeniem");
+        infoDialog->show();
+    }
+
 }
