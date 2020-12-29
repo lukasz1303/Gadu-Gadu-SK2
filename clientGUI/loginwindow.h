@@ -34,6 +34,7 @@ private:
     ContactsWindow *contactsWindows;
     SignUpWindow *signUpWindow;
     InfoDialog *infoDialog;
+    char buf[100];
 };
 
 #endif // LOGINWINDOW_H

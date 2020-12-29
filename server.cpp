@@ -64,7 +64,7 @@ void *ThreadBehavior(void *t_data)
         printf("%s\n", buff);
         
         if(strncmp(buff,"SIGN_UP",7)==0){
-            std::fstream usersFile;
+            std::ofstream usersFile;
             usersFile.open("users", std::ios_base::app);
             
             if (usersFile.is_open()){
@@ -72,11 +72,42 @@ void *ThreadBehavior(void *t_data)
                 usersFile << s.substr(s.find(":")+1) << std::endl;
                 usersFile.close();
                 char ret[10] = "OK";
+                
                 write((*th_data).socket, ret, strlen(ret));
             } else {
                 printf("Nie można otworzyć pliku \"users\"\n");
             }
         }
+        
+        if(strncmp(buff,"SIGN_IN",7)==0){
+            std::ifstream usersFile;
+            usersFile.open("users");
+            std::string s = buff;
+            s = s.substr(s.find(":")+1);
+            bool finded = false;
+            
+            if (usersFile.is_open()){
+                std::string line;
+                while (getline(usersFile,line)){
+                    if (s.compare(line.substr(0,line.rfind(":")))== 0){
+                        finded = true;
+                        break;
+                    }
+                }   
+                usersFile.close();
+                if(finded){
+                    char ret[10] = "OK";
+                    write((*th_data).socket, ret, strlen(ret));
+                } else {
+                    char ret[10] = "NO";
+                    write((*th_data).socket, ret, strlen(ret));
+                }
+                
+            } else {
+                printf("Nie można otworzyć pliku \"users\"\n");
+            }
+        }
+        
         
             
         send_message(buff, (*th_data).socket);

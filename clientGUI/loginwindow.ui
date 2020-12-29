@@ -96,58 +96,11 @@
      <string>Gadu-Gadu</string>
     </property>
    </widget>
-   <widget class="QTextEdit" name="textEdit">
+   <widget class="QTextEdit" name="loginTextEdit">
     <property name="geometry">
      <rect>
       <x>170</x>
       <y>110</y>
-      <width>211</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="palette">
-     <palette>
-      <active>
-       <colorrole role="Base">
-        <brush brushstyle="SolidPattern">
-         <color alpha="255">
-          <red>255</red>
-          <green>243</green>
-          <blue>138</blue>
-         </color>
-        </brush>
-       </colorrole>
-      </active>
-      <inactive>
-       <colorrole role="Base">
-        <brush brushstyle="SolidPattern">
-         <color alpha="255">
-          <red>255</red>
-          <green>243</green>
-          <blue>138</blue>
-         </color>
-        </brush>
-       </colorrole>
-      </inactive>
-      <disabled>
-       <colorrole role="Base">
-        <brush brushstyle="SolidPattern">
-         <color alpha="255">
-          <red>245</red>
-          <green>121</green>
-          <blue>0</blue>
-         </color>
-        </brush>
-       </colorrole>
-      </disabled>
-     </palette>
-    </property>
-   </widget>
-   <widget class="QTextEdit" name="textEdit_2">
-    <property name="geometry">
-     <rect>
-      <x>170</x>
-      <y>170</y>
       <width>211</width>
       <height>31</height>
      </rect>
@@ -269,6 +222,58 @@
     </property>
     <property name="text">
      <string>Zarejestruj</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="passwordLineEdit">
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>170</y>
+      <width>211</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="palette">
+     <palette>
+      <active>
+       <colorrole role="Base">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>255</red>
+          <green>243</green>
+          <blue>138</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </active>
+      <inactive>
+       <colorrole role="Base">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>255</red>
+          <green>243</green>
+          <blue>138</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </inactive>
+      <disabled>
+       <colorrole role="Base">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>245</red>
+          <green>121</green>
+          <blue>0</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </disabled>
+     </palette>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
     </property>
    </widget>
   </widget>

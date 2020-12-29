@@ -11,6 +11,7 @@ LoginWindow::LoginWindow(QWidget *parent) :
     connect(tcpSocket, static_cast<QAbstractSocketErrorSignal>(&QAbstractSocket::error), this, &LoginWindow::displayError);
     ui->setupUi(this);
     tcpSocket->connectToHost("127.0.0.1", 1234);
+    ui->passwordLineEdit->setEchoMode(QLineEdit::Password);
 
 }
 
@@ -24,32 +25,35 @@ void LoginWindow::displayError(QAbstractSocket::SocketError socketError){
 }
 
 void LoginWindow::readData(){
-    char buf[100];
     int n = tcpSocket->readLine(buf,100);
     buf[n] = 0;
     qDebug() << buf;
-   // ui->textBrowser->insertPlainText(buf);
-    //ui->textBrowser->insertPlainText("\n");
+
+    if (strcmp(buf, "OK") == 0){
+        hide();
+        contactsWindows = new ContactsWindow(this);
+        disconnect(tcpSocket,&QIODevice::readyRead,0,0);
+        contactsWindows->setSocket(tcpSocket);
+        contactsWindows->show();
+    } else {
+        infoDialog = new InfoDialog(this);
+        infoDialog->setLabelText("Podano nieprawidłowy login lub hasło");
+        infoDialog->show();
+    }
 }
 
 void LoginWindow::on_signInButton_clicked()
 {
     QString msg = "SIGN_IN:";
     QRegExp re("[^A-Za-z0-9]");
-    QString login = ui->textEdit->toPlainText();
-    QString password = ui->textEdit_2->toPlainText();
+    QString login = ui->loginTextEdit->toPlainText();
+    QString password = ui->passwordLineEdit->text();
     if(re.indexIn(login)<0 && re.indexIn(password)<0)
     {
-        msg.append(ui->textEdit->toPlainText());
+        msg.append(login);
         msg.append(":");
-        msg.append(ui->textEdit_2->toPlainText());
+        msg.append(password);
         tcpSocket->write(msg.toLatin1());
-
-        hide();
-        contactsWindows = new ContactsWindow(this);
-        disconnect(tcpSocket,&QIODevice::readyRead,0,0);
-        contactsWindows->setSocket(tcpSocket);
-        contactsWindows->show();
     }
     else
     {
