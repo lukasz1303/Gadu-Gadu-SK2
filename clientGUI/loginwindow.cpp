@@ -38,7 +38,6 @@ void LoginWindow::on_signInButton_clicked()
     QRegExp re("[^A-Za-z0-9]");
     QString login = ui->textEdit->toPlainText();
     QString password = ui->textEdit_2->toPlainText();
-
     if(re.indexIn(login)<0 && re.indexIn(password)<0)
     {
         msg.append(ui->textEdit->toPlainText());
@@ -57,7 +56,6 @@ void LoginWindow::on_signInButton_clicked()
         badlogindialog = new BadLoginDialog(this);
         badlogindialog->show();
     }
-
 
 }
 

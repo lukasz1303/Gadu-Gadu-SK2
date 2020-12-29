@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QMdiSubWindow>
 
@@ -7,7 +7,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->plainTextEdit->setPlaceholderText("Wprowadź wiadomość");
+    ui->textEdit->setPlaceholderText("Wprowadź wiadomość");
 }
 
 MainWindow::~MainWindow()
@@ -37,10 +37,12 @@ void MainWindow::displayError(QAbstractSocket::SocketError socketError){
 
 void MainWindow::on_sendButton_clicked()
 {
-    tcpSocket->write(ui->plainTextEdit->toPlainText().toLatin1().data());
-    ui->textBrowser->insertPlainText(ui->plainTextEdit->toPlainText());
+    QByteArray msg =ui->textEdit->toMarkdown().toUtf8();
+    msg = msg.left(msg.lastIndexOf("\n\n"));
+    tcpSocket->write(msg);
+    ui->textBrowser->insertPlainText(msg);
     ui->textBrowser->insertPlainText("\n");
-    ui->plainTextEdit->clear();
+    ui->textEdit->clear();
 }
 
 void MainWindow::on_closeButton_clicked()

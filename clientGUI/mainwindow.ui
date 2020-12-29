@@ -138,7 +138,7 @@
      <string>Wyślij</string>
     </property>
    </widget>
-   <widget class="QPlainTextEdit" name="plainTextEdit">
+   <widget class="QTextEdit" name="textEdit">
     <property name="geometry">
      <rect>
       <x>33</x>

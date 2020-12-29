@@ -21,6 +21,7 @@ void SignUpWindow::on_signUpButton_clicked()
     QString login = ui->loginTextEdit->toPlainText();
     QString nrGG = ui->nrGGTextEdit->toPlainText();
     QString password = ui->passTextEdit->toPlainText();
+
     if(re.indexIn(login)<0 && re.indexIn(password)<0 && re2.indexIn(nrGG)<0)
     {
         msg.append(ui->loginTextEdit->toPlainText());
@@ -29,7 +30,8 @@ void SignUpWindow::on_signUpButton_clicked()
         msg.append(":");
         msg.append(ui->passTextEdit->toPlainText());
         tcpSocket->write(msg.toLatin1());
-    } else if (re2.indexIn(nrGG)>=0)
+    }
+    else if (re2.indexIn(nrGG)>=0)
     {
         badlogindialog = new BadLoginDialog(this);
         badlogindialog->setLabelText("Nr Gadu-Gadu musi składać się wyłącznie z cyfr");
