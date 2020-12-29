@@ -32,14 +32,25 @@ void LoginWindow::readData(){
     //ui->textBrowser->insertPlainText("\n");
 }
 
-void LoginWindow::on_pushButton_clicked()
+void LoginWindow::on_signInButton_clicked()
 {
-    tcpSocket->write(ui->textEdit->toPlainText().toLatin1().data());
-    tcpSocket->write(ui->textEdit_2->toPlainText().toLatin1().data());
+    QString msg = "SIGN_IN:";
+    msg.append(ui->textEdit->toPlainText());
+    msg.append(":");
+    msg.append(ui->textEdit_2->toPlainText());
+    tcpSocket->write(msg.toLatin1());
+
     hide();
     contactsWindows = new ContactsWindow(this);
     disconnect(tcpSocket,&QIODevice::readyRead,0,0);
     contactsWindows->setSocket(tcpSocket);
     contactsWindows->show();
 
+}
+
+void LoginWindow::on_signUpButton_clicked()
+{
+    signUpWindow = new SignUpWindow(this);
+    signUpWindow->setSocket(tcpSocket);
+    signUpWindow->show();
 }

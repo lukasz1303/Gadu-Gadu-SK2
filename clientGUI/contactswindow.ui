@@ -226,7 +226,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Users</string>
+     <string>Znajomi</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_2">
@@ -239,7 +239,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Groups</string>
+     <string>Grupy</string>
     </property>
    </widget>
    <widget class="QListWidget" name="listWidget">
@@ -289,7 +289,7 @@
      </palette>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QPushButton" name="quitButton">
     <property name="geometry">
      <rect>
       <x>80</x>
@@ -299,7 +299,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Quit</string>
+     <string>Zamknij</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_4">
@@ -312,7 +312,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Add</string>
+     <string>Dodaj</string>
     </property>
    </widget>
   </widget>

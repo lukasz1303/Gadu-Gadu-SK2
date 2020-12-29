@@ -7,7 +7,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->plainTextEdit->setPlaceholderText("Wprowadz wiadomosc");
+    ui->plainTextEdit->setPlaceholderText("Wprowadź wiadomość");
 }
 
 MainWindow::~MainWindow()
@@ -31,11 +31,6 @@ void MainWindow::readData(){
 }
 
 
-void MainWindow::on_pushButton_clicked()
-{
-    qDebug() << ui->plainTextEdit->toPlainText();
-}
-
 void MainWindow::displayError(QAbstractSocket::SocketError socketError){
     qDebug() << socketError;
 }
@@ -48,7 +43,7 @@ void MainWindow::on_sendButton_clicked()
     ui->plainTextEdit->clear();
 }
 
-void MainWindow::on_pushButton_3_clicked()
+void MainWindow::on_closeButton_clicked()
 {
     close();
 }

@@ -223,20 +223,20 @@
      </font>
     </property>
     <property name="text">
-     <string>Password:</string>
+     <string>Hasło:</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="signInButton">
     <property name="geometry">
      <rect>
       <x>190</x>
-      <y>250</y>
+      <y>230</y>
       <width>80</width>
       <height>24</height>
      </rect>
     </property>
     <property name="text">
-     <string>Sign in</string>
+     <string>Zaloguj</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_4">
@@ -252,10 +252,23 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>:/images/icon</pixmap>
+     <pixmap resource="images/images.qrc">:/images/icon</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="signUpButton">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>290</y>
+      <width>80</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Zarejestruj</string>
     </property>
    </widget>
   </widget>
@@ -270,6 +283,8 @@
    </property>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="images/images.qrc"/>
+ </resources>
  <connections/>
 </ui>

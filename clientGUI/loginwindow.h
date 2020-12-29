@@ -4,7 +4,9 @@
 #include <QMainWindow>
 #include <QtDebug>
 #include <QtNetwork>
+#include <string>
 #include "contactswindow.h"
+#include "signupwindow.h"
 
 namespace Ui {
 class LoginWIndow;
@@ -21,12 +23,15 @@ public:
 private slots:
     void displayError(QAbstractSocket::SocketError socketError);
     void readData();
-    void on_pushButton_clicked();
+    void on_signInButton_clicked();
+
+    void on_signUpButton_clicked();
 
 private:
     Ui::LoginWIndow *ui;
     QTcpSocket *tcpSocket;
     ContactsWindow *contactsWindows;
+    SignUpWindow *signUpWindow;
 };
 
 #endif // LOGINWINDOW_H

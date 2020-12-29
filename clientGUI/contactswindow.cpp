@@ -16,7 +16,7 @@ ContactsWindow::~ContactsWindow()
     delete ui;
 }
 
-void ContactsWindow::on_pushButton_3_clicked()
+void ContactsWindow::on_quitButton_clicked()
 {
     QApplication::quit();
 }

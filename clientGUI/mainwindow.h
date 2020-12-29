@@ -19,14 +19,11 @@ public:
     void setSocket(QTcpSocket *socket);
 
 private slots:
-    //void readData();
 
-    void on_pushButton_clicked();
     void displayError(QAbstractSocket::SocketError socketError);
     void on_sendButton_clicked();
     void readData();
-    void on_pushButton_3_clicked();
-
+    void on_closeButton_clicked();
 
 private:
     Ui::MainWindow *ui;

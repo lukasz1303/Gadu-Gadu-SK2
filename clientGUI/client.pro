@@ -12,17 +12,20 @@ SOURCES += \
     contactswindow.cpp \
     loginwindow.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    signupwindow.cpp
 
 HEADERS += \
     contactswindow.h \
     loginwindow.h \
-    mainwindow.h
+    mainwindow.h \
+    signupwindow.h
 
 FORMS += \
     contactswindow.ui \
     loginwindow.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    signupwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

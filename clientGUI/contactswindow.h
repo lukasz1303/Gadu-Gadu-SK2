@@ -19,7 +19,7 @@ public:
     void setSocket(QTcpSocket *socket);
 
 private slots:
-    void on_pushButton_3_clicked();
+    void on_quitButton_clicked();
 
     void on_listWidget_itemClicked(QListWidgetItem *item);
 
