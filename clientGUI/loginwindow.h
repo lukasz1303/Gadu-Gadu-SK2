@@ -7,6 +7,7 @@
 #include <string>
 #include "contactswindow.h"
 #include "signupwindow.h"
+#include "badlogindialog.h"
 
 namespace Ui {
 class LoginWIndow;
@@ -32,6 +33,7 @@ private:
     QTcpSocket *tcpSocket;
     ContactsWindow *contactsWindows;
     SignUpWindow *signUpWindow;
+    BadLoginDialog *badlogindialog;
 };
 
 #endif // LOGINWINDOW_H

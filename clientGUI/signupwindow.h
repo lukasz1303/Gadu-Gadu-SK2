@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QtNetwork>
+#include "badlogindialog.h"
 
 namespace Ui {
 class SignUpWindow;
@@ -23,6 +24,7 @@ private slots:
 private:
     Ui::SignUpWindow *ui;
     QTcpSocket *tcpSocket;
+    BadLoginDialog *badlogindialog;
 };
 
 #endif // SIGNUPWINDOW_H

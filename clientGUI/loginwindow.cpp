@@ -35,16 +35,29 @@ void LoginWindow::readData(){
 void LoginWindow::on_signInButton_clicked()
 {
     QString msg = "SIGN_IN:";
-    msg.append(ui->textEdit->toPlainText());
-    msg.append(":");
-    msg.append(ui->textEdit_2->toPlainText());
-    tcpSocket->write(msg.toLatin1());
+    QRegExp re("[^A-Za-z0-9]");
+    QString login = ui->textEdit->toPlainText();
+    QString password = ui->textEdit_2->toPlainText();
 
-    hide();
-    contactsWindows = new ContactsWindow(this);
-    disconnect(tcpSocket,&QIODevice::readyRead,0,0);
-    contactsWindows->setSocket(tcpSocket);
-    contactsWindows->show();
+    if(re.indexIn(login)<0 && re.indexIn(password)<0)
+    {
+        msg.append(ui->textEdit->toPlainText());
+        msg.append(":");
+        msg.append(ui->textEdit_2->toPlainText());
+        tcpSocket->write(msg.toLatin1());
+
+        hide();
+        contactsWindows = new ContactsWindow(this);
+        disconnect(tcpSocket,&QIODevice::readyRead,0,0);
+        contactsWindows->setSocket(tcpSocket);
+        contactsWindows->show();
+    }
+    else
+    {
+        badlogindialog = new BadLoginDialog(this);
+        badlogindialog->show();
+    }
+
 
 }
 
@@ -54,3 +67,4 @@ void LoginWindow::on_signUpButton_clicked()
     signUpWindow->setSocket(tcpSocket);
     signUpWindow->show();
 }
+

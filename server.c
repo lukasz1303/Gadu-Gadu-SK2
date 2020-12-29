@@ -53,7 +53,7 @@ void *ThreadBehavior(void *t_data)
         memset(buff,0,sizeof(buff));
         bytes = read((*th_data).socket, buff, 255);
         if (bytes == 0){
-            printf("Client closed, socekt = %d\n", (*th_data).socket);
+            printf("Client closed, socket = %d\n", (*th_data).socket);
             break;
         }
         printf("read %d bytes\n", bytes);
