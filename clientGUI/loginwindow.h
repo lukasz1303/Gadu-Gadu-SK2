@@ -26,7 +26,6 @@ private slots:
     void displayError(QAbstractSocket::SocketError socketError);
     void readData();
     void on_signInButton_clicked();
-
     void on_signUpButton_clicked();
 
 private:

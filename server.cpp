@@ -115,10 +115,11 @@ void *ThreadBehavior(void *t_data)
             }
         }
         
-        if(strncmp(buff,"ADD_CONT",7)==0){
+        if(strncmp(buff,"ADD_CONT",8)==0){
 
             std::string s = buff;
-            std::string filename = s.substr(s.find(":")+1,s.length()).substr(0,s.find(":")-2);
+            s = s.substr(s.find(":")+1,s.length());
+            std::string filename = s.substr(0,s.find(":"));
             std::string contactsFileName = "contacts/" + filename;
             std::fstream contactsFile;
             contactsFile.open(contactsFileName);
@@ -126,7 +127,7 @@ void *ThreadBehavior(void *t_data)
             std::string line;
             bool finded = false;
             if (contactsFile.is_open()){
-                std::string contact = s.substr(s.find(filename)+filename.length()+1);
+                std::string contact = s;
                  while (getline(contactsFile,line)){
                     if (contact.substr(0,contact.find(":")).compare(line.substr(0,line.find(":")))== 0 ||
                         contact.substr(contact.find(":")+1, contact.length()).compare(line.substr(line.find(":")+1, line.length()))== 0){
@@ -147,6 +148,31 @@ void *ThreadBehavior(void *t_data)
             } else {
                 printf("Nie można otworzyć pliku \"users\"\n");
             }
+            contactsFile.close();
+        }
+        
+        if(strncmp(buff,"GET_CONT",8)==0){
+
+            std::string s = buff;
+            std::string filename = s.substr(s.find(":")+1,s.length());
+            std::string contactsFileName = "contacts/" + filename;
+            std::ifstream contactsFile;
+            contactsFile.open(contactsFileName);
+            std::string line;  
+            if (contactsFile.is_open()){
+                while (getline(contactsFile,line)){
+                    std::cout << line << std::endl;
+                    char buff2[100]; 
+                    s = "CONTACT:";
+                    s.append(line.substr(0,line.length()));
+                    strncpy(buff2,s.c_str(),sizeof(buff2));
+                    buff2[s.length()]=0;
+                    write((*th_data).socket, buff2, sizeof(buff2));
+                }
+            } else {
+                printf("Nie można otworzyć pliku \"users\"\n");
+            }
+            
             contactsFile.close();
         }
         

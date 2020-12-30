@@ -35,8 +35,8 @@ void LoginWindow::readData(){
         std::string s = buf;
         user->setNumberGG(std::stoi(s.substr(s.find("SIGN_IN:OK:") + strlen("SIGN_IN:OK:"))));
         hide();
-        contactsWindows = new ContactsWindow(this);
         disconnect(tcpSocket,&QIODevice::readyRead,0,0);
+        contactsWindows = new ContactsWindow(this);
         contactsWindows->setSocket(tcpSocket);
         contactsWindows->show();
     } else if(strcmp(buf, "SIGN_IN:ERROR") == 0){
