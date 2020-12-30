@@ -28,6 +28,9 @@ void SignUpWindow::on_signUpButton_clicked()
             tcpSocket->connectToHost("127.0.0.1", 1234);
         }
         if(tcpSocket->state() == QAbstractSocket::ConnectedState){
+            if (!reading){
+               connect(tcpSocket, &QIODevice::readyRead, this,&SignUpWindow::readData);
+            }
             msg.append(ui->loginTextEdit->toPlainText());
             msg.append(":");
             msg.append(ui->passTextEdit->toPlainText());
@@ -58,6 +61,7 @@ void SignUpWindow::setSocket(QTcpSocket *socket)
 {
     tcpSocket = socket;
     connect(tcpSocket, &QIODevice::readyRead, this,&SignUpWindow::readData);
+    reading = true;
 }
 
 void SignUpWindow::readData(){

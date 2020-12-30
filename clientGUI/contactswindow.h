@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QListWidgetItem>
 #include "mainwindow.h"
+#include "addcontactwindow.h"
 
 namespace Ui {
 class ContactsWindow;
@@ -20,16 +21,14 @@ public:
 
 private slots:
     void on_quitButton_clicked();
-
     void on_listWidget_itemClicked(QListWidgetItem *item);
-
-    void on_pushButton_4_clicked();
-
+    void on_addButton_clicked();
 
 private:
     Ui::ContactsWindow *ui;
     QTcpSocket *tcpSocket;
     MainWindow *mainWindow;
+    AddContactWindow *addContactWindow;
 };
 
 #endif // CONTACTSWINDOW_H

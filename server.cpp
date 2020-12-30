@@ -85,22 +85,26 @@ void *ThreadBehavior(void *t_data)
             std::string s = buff;
             s = s.substr(s.find(":")+1);
             bool finded = false;
-            
+            std::string ret;
             if (usersFile.is_open()){
                 std::string line;
                 while (getline(usersFile,line)){
                     if (s.compare(line.substr(0,line.rfind(":")))== 0){
                         finded = true;
+                        ret = "SIGN_IN:OK:";
+                        ret.append(line.substr(line.rfind(":")+1,line.length()));
                         break;
                     }
                 }   
                 usersFile.close();
+                char buff2[50];             
                 if(finded){
-                    char ret[20] = "SIGN_IN:OK";
-                    write((*th_data).socket, ret, strlen(ret));
+                    strncpy(buff2,ret.c_str(),sizeof(buff2));
+                    buff2[ret.length()]=0;
+                    write((*th_data).socket, buff2, sizeof(buff2));
                 } else {
-                    char ret[20] = "SIGN_IN:ERROR";
-                    write((*th_data).socket, ret, strlen(ret));
+                    strncpy(buff2,"SIGN_IN:ERROR",sizeof(buff2));
+                    write((*th_data).socket, buff2, sizeof(buff2));
                 }
                 
             } else {

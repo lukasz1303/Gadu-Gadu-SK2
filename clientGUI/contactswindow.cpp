@@ -29,12 +29,14 @@ void ContactsWindow::on_listWidget_itemClicked(QListWidgetItem *item)
     mainWindow->show();
 }
 
-void ContactsWindow::on_pushButton_4_clicked()
-{
-
-}
-
 void ContactsWindow::setSocket(QTcpSocket *socket)
 {
     tcpSocket = socket;
+}
+
+void ContactsWindow::on_addButton_clicked()
+{
+    addContactWindow = new AddContactWindow(this);
+    addContactWindow->setSocket(tcpSocket);
+    addContactWindow->show();
 }

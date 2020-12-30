@@ -27,6 +27,7 @@ private:
     QTcpSocket *tcpSocket;
     InfoDialog *infoDialog;
     char buf[100];
+    bool reading = false;
 };
 
 #endif // SIGNUPWINDOW_H

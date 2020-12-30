@@ -30,7 +30,10 @@ void LoginWindow::readData(){
     buf[n] = 0;
     qDebug() << buf;
 
-    if (strcmp(buf, "SIGN_IN:OK") == 0){
+    if (strncmp(buf, "SIGN_IN:OK",10) == 0){
+        User *user = user->getInstance();
+        std::string s = buf;
+        user->setNumberGG(std::stoi(s.substr(s.find("SIGN_IN:OK:") + strlen("SIGN_IN:OK:"))));
         hide();
         contactsWindows = new ContactsWindow(this);
         disconnect(tcpSocket,&QIODevice::readyRead,0,0);

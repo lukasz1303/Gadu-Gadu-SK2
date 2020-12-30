@@ -302,7 +302,7 @@
      <string>Zamknij</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_4">
+   <widget class="QPushButton" name="addButton">
     <property name="geometry">
      <rect>
       <x>220</x>
