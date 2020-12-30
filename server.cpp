@@ -60,7 +60,7 @@ void *ThreadBehavior(void *t_data)
             printf("Client closed, socket = %d\n", (*th_data).socket);
             break;
         }
-        printf("read %d bytes\n", bytes);
+        //printf("read %d bytes\n", bytes);
         printf("%s\n", buff);
         
         if(strncmp(buff,"SIGN_UP",7)==0){
@@ -71,6 +71,9 @@ void *ThreadBehavior(void *t_data)
                 std::string s = buff;
                 usersFile << s.substr(s.find(":")+1) << std::endl;
                 usersFile.close();
+                std::string contactsFileName = "contacts/" + s.substr(s.rfind(":")+1);
+                std::ofstream contactsFile(contactsFileName);
+                contactsFile.close();
                 char ret[20] = "SIGN_UP:OK";
                 
                 write((*th_data).socket, ret, strlen(ret));
@@ -112,6 +115,40 @@ void *ThreadBehavior(void *t_data)
             }
         }
         
+        if(strncmp(buff,"ADD_CONT",7)==0){
+
+            std::string s = buff;
+            std::string filename = s.substr(s.find(":")+1,s.length()).substr(0,s.find(":")-2);
+            std::string contactsFileName = "contacts/" + filename;
+            std::fstream contactsFile;
+            contactsFile.open(contactsFileName);
+            s = s.substr(s.find(":")+1);
+            std::string line;
+            bool finded = false;
+            if (contactsFile.is_open()){
+                std::string contact = s.substr(s.find(filename)+filename.length()+1);
+                 while (getline(contactsFile,line)){
+                    if (contact.substr(0,contact.find(":")).compare(line.substr(0,line.find(":")))== 0 ||
+                        contact.substr(contact.find(":")+1, contact.length()).compare(line.substr(line.find(":")+1, line.length()))== 0){
+                        char buff2[20] = "ADD_CONT:EXISTS";
+                        write((*th_data).socket, buff2, sizeof(buff2));
+                        finded = true;
+                        break;
+                    }
+                }
+                if(!finded){
+                    contactsFile.clear();
+                    contactsFile.seekp(0, std::ios_base::end);
+                    contactsFile << contact << std::endl;
+                    char buff2[20] = "ADD_CONT:OK";
+                    write((*th_data).socket, buff2, sizeof(buff2));
+                }
+                
+            } else {
+                printf("Nie można otworzyć pliku \"users\"\n");
+            }
+            contactsFile.close();
+        }
         
             
         send_message(buff, (*th_data).socket);

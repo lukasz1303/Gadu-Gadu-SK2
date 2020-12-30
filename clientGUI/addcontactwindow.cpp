@@ -23,6 +23,20 @@ void AddContactWindow::setSocket(QTcpSocket *socket)
 void AddContactWindow::readData(){
     int n = tcpSocket->readLine(buf,100);
     buf[n] = 0;
+    qDebug() << buf;
+
+    if (strcmp(buf, "ADD_CONT:OK") == 0){
+        infoDialog = new InfoDialog(this);
+        infoDialog->setLabelText("Dodano znajomego");
+        disconnect(tcpSocket,&QIODevice::readyRead,0,0);
+        infoDialog->show();
+        hide();
+
+    } else if(strcmp(buf, "ADD_CONT:EXISTS") == 0){
+        infoDialog = new InfoDialog(this);
+        infoDialog->setLabelText("Już istnieje znajomy o takiej nazwie lub numerze GG");
+        infoDialog->show();
+    }
 }
 void AddContactWindow::on_addButton_clicked()
 {

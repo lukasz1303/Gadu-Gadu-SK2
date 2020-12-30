@@ -20,5 +20,5 @@ void InfoDialog::setLabelText(QString str)
 
 void InfoDialog::on_pushButton_clicked()
 {
-    close();
+    hide();
 }
