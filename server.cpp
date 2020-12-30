@@ -71,7 +71,7 @@ void *ThreadBehavior(void *t_data)
                 std::string s = buff;
                 usersFile << s.substr(s.find(":")+1) << std::endl;
                 usersFile.close();
-                char ret[10] = "OK";
+                char ret[20] = "SIGN_UP:OK";
                 
                 write((*th_data).socket, ret, strlen(ret));
             } else {
@@ -96,10 +96,10 @@ void *ThreadBehavior(void *t_data)
                 }   
                 usersFile.close();
                 if(finded){
-                    char ret[10] = "OK";
+                    char ret[20] = "SIGN_IN:OK";
                     write((*th_data).socket, ret, strlen(ret));
                 } else {
-                    char ret[10] = "NO";
+                    char ret[20] = "SIGN_IN:ERROR";
                     write((*th_data).socket, ret, strlen(ret));
                 }
                 

@@ -24,12 +24,21 @@ void SignUpWindow::on_signUpButton_clicked()
 
     if(re.indexIn(login)<0 && re.indexIn(password)<0 && re2.indexIn(nrGG)<0)
     {
-        msg.append(ui->loginTextEdit->toPlainText());
-        msg.append(":");
-        msg.append(ui->passTextEdit->toPlainText());
-        msg.append(":");
-        msg.append(ui->nrGGTextEdit->toPlainText());
-        tcpSocket->write(msg.toLatin1());
+        if(tcpSocket->state() != QAbstractSocket::ConnectedState){
+            tcpSocket->connectToHost("127.0.0.1", 1234);
+        }
+        if(tcpSocket->state() == QAbstractSocket::ConnectedState){
+            msg.append(ui->loginTextEdit->toPlainText());
+            msg.append(":");
+            msg.append(ui->passTextEdit->toPlainText());
+            msg.append(":");
+            msg.append(ui->nrGGTextEdit->toPlainText());
+            tcpSocket->write(msg.toLatin1());
+        }else {
+            infoDialog = new InfoDialog(this);
+            infoDialog->setLabelText("Brak połączenia z serwerem");
+            infoDialog->show();
+        }
 
     }
     else if (re2.indexIn(nrGG)>=0)
@@ -55,9 +64,10 @@ void SignUpWindow::readData(){
     int n = tcpSocket->readLine(buf,100);
     buf[n] = 0;
 
-    if (strcmp(buf, "OK") == 0){
+    if (strcmp(buf, "SIGN_UP:OK") == 0){
         infoDialog = new InfoDialog(this);
         infoDialog->setLabelText("Rejestracja zakończona pomyślnie");
+        disconnect(tcpSocket,&QIODevice::readyRead,0,0);
         hide();
         infoDialog->show();
     } else {
@@ -65,5 +75,4 @@ void SignUpWindow::readData(){
         infoDialog->setLabelText("Rejestracja zakończona niepowodzeniem");
         infoDialog->show();
     }
-
 }

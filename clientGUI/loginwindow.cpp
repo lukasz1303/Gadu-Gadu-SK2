@@ -9,6 +9,7 @@ LoginWindow::LoginWindow(QWidget *parent) :
     connect(tcpSocket, &QIODevice::readyRead, this,&LoginWindow::readData);
     typedef void (QAbstractSocket::*QAbstractSocketErrorSignal)(QAbstractSocket::SocketError);
     connect(tcpSocket, static_cast<QAbstractSocketErrorSignal>(&QAbstractSocket::error), this, &LoginWindow::displayError);
+    reading = true;
     ui->setupUi(this);
     tcpSocket->connectToHost("127.0.0.1", 1234);
     ui->passwordLineEdit->setEchoMode(QLineEdit::Password);
@@ -29,13 +30,13 @@ void LoginWindow::readData(){
     buf[n] = 0;
     qDebug() << buf;
 
-    if (strcmp(buf, "OK") == 0){
+    if (strcmp(buf, "SIGN_IN:OK") == 0){
         hide();
         contactsWindows = new ContactsWindow(this);
         disconnect(tcpSocket,&QIODevice::readyRead,0,0);
         contactsWindows->setSocket(tcpSocket);
         contactsWindows->show();
-    } else {
+    } else if(strcmp(buf, "SIGN_IN:ERROR") == 0){
         infoDialog = new InfoDialog(this);
         infoDialog->setLabelText("Podano nieprawidłowy login lub hasło");
         infoDialog->show();
@@ -44,22 +45,35 @@ void LoginWindow::readData(){
 
 void LoginWindow::on_signInButton_clicked()
 {
-    QString msg = "SIGN_IN:";
-    QRegExp re("[^A-Za-z0-9]");
-    QString login = ui->loginTextEdit->toPlainText();
-    QString password = ui->passwordLineEdit->text();
-    if(re.indexIn(login)<0 && re.indexIn(password)<0)
-    {
-        msg.append(login);
-        msg.append(":");
-        msg.append(password);
-        tcpSocket->write(msg.toLatin1());
+    if(tcpSocket->state() != QAbstractSocket::ConnectedState){
+        tcpSocket->connectToHost("127.0.0.1", 1234);
     }
-    else
-    {
+    if(tcpSocket->state() == QAbstractSocket::ConnectedState){
+        if (!reading){
+            connect(tcpSocket, &QIODevice::readyRead, this,&LoginWindow::readData);
+        }
+        QString msg = "SIGN_IN:";
+        QRegExp re("[^A-Za-z0-9]");
+        QString login = ui->loginTextEdit->toPlainText();
+        QString password = ui->passwordLineEdit->text();
+        if(re.indexIn(login)<0 && re.indexIn(password)<0)
+        {
+            msg.append(login);
+            msg.append(":");
+            msg.append(password);
+            tcpSocket->write(msg.toLatin1());
+        }
+        else
+        {
+            infoDialog = new InfoDialog(this);
+            infoDialog->show();
+        }
+    } else {
         infoDialog = new InfoDialog(this);
+        infoDialog->setLabelText("Brak połączenia z serwerem");
         infoDialog->show();
     }
+
 
 }
 
@@ -67,6 +81,7 @@ void LoginWindow::on_signUpButton_clicked()
 {
     signUpWindow = new SignUpWindow(this);
     disconnect(tcpSocket,&QIODevice::readyRead,0,0);
+    reading = false;
     signUpWindow->setSocket(tcpSocket);
     signUpWindow->show();
 }
