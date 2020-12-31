@@ -159,15 +159,15 @@ void *ThreadBehavior(void *t_data)
             std::ifstream contactsFile;
             contactsFile.open(contactsFileName);
             std::string line;  
+            char buff2[100];
             if (contactsFile.is_open()){
                 while (getline(contactsFile,line)){
-                    std::cout << line << std::endl;
-                    char buff2[100]; 
+                    memset(buff2,0,sizeof(buff2));
                     s = "CONTACT:";
-                    s.append(line.substr(0,line.length()));
+                    s.append(line);
                     strncpy(buff2,s.c_str(),sizeof(buff2));
-                    buff2[s.length()]=0;
-                    write((*th_data).socket, buff2, sizeof(buff2));
+                    buff2[s.length()]='\n';
+                    write((*th_data).socket, buff2, (s.length()+1)*sizeof(buff2[0]));
                 }
             } else {
                 printf("Nie można otworzyć pliku \"users\"\n");
@@ -237,30 +237,30 @@ int main(int argc, char* argv[])
        exit(1);
    }
 
-   while(1)
-   {
-       connection_socket_descriptor = accept(server_socket_descriptor, NULL, NULL);
-       if (connection_socket_descriptor < 0)
-       {
-           fprintf(stderr, "%s: Błąd przy próbie utworzenia gniazda dla połączenia.\n", argv[0]);
-           exit(1);
-       } else {
-          printf("Nawiazano poloczenie, socket = %d\n",connection_socket_descriptor );
-       }
+    while(1)
+    {
+        connection_socket_descriptor = accept(server_socket_descriptor, NULL, NULL);
+        if (connection_socket_descriptor < 0)
+        {
+            fprintf(stderr, "%s: Błąd przy próbie utworzenia gniazda dla połączenia.\n", argv[0]);
+            exit(1);
+        } else {
+            printf("Nawiazano poloczenie, socket = %d\n",connection_socket_descriptor );
+        }
 
-       handleConnection(connection_socket_descriptor);
+        handleConnection(connection_socket_descriptor);
        
-       client_t *client = (client_t *)malloc(sizeof(client_t));
-		client->sockfd = connection_socket_descriptor;
-		client->id = id++;
+        client_t *client = (client_t *)malloc(sizeof(client_t));
+        client->sockfd = connection_socket_descriptor;
+        client->id = id++;
        
-       for(int i=0; i < QUEUE_SIZE; i++){
-		if(clients[i]==NULL){
-			clients[i] = client;
-			break;
-		}
-	}
-   }
+        for(int i=0; i < QUEUE_SIZE; i++){
+            if(clients[i]==NULL){
+                clients[i] = client;
+                break;
+            }
+        }
+    }
 
    close(server_socket_descriptor);
    return(0);

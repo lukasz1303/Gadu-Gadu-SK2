@@ -44,18 +44,23 @@ void ContactsWindow::on_addButton_clicked()
 
 
 void ContactsWindow::readData(){
-    int n = tcpSocket->readLine(buf,100);
-    buf[n] = 0;
-    qDebug() << buf;
 
-    if (strncmp(buf, "CONTACT",7) == 0){
-        User *user = user->getInstance();
-        std::string s = buf;
-        s = s.substr(s.find("CONTACT")+8,s.length());
-        qDebug() << s.c_str();
-        QString name = QString::fromStdString(s.substr(0,s.find(":")));
-        QListWidgetItem *item = new QListWidgetItem(name);
-        ui->listWidget->addItem(item);
+    while(tcpSocket->canReadLine()){
+        memset(buf,0,sizeof(buf));
+        tcpSocket->readLine(buf,100);
+        qDebug() << buf;
+
+        if (strncmp(buf, "CONTACT",7) == 0){
+            User *user = user->getInstance();
+            std::string s = buf;
+            s = s.substr(s.find("CONTACT")+8,s.length());
+            QString name = QString::fromStdString(s.substr(0,s.find(":")));
+            std::string gg = s.substr(s.find(":")+1,s.length());
+            int number = std::stoi(gg.substr(0,gg.find("\n")));
+            QListWidgetItem *item = new QListWidgetItem(name);
+            numbersGG.push_back(number);
+            ui->listWidget->addItem(item);
+        }
     }
 }
 

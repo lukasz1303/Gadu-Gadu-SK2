@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QListWidgetItem>
+#include <vector>
 #include "mainwindow.h"
 #include "addcontactwindow.h"
 #include "infodialog.h"
@@ -35,6 +36,7 @@ private:
     AddContactWindow *addContactWindow;
     char buf[100];
     bool reading = false;
+    std::vector<int> numbersGG;
 };
 
 #endif // CONTACTSWINDOW_H
