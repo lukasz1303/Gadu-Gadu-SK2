@@ -51,7 +51,7 @@ void *ThreadBehavior(void *t_data)
     struct thread_data_t *th_data = (struct thread_data_t*)t_data;
     char buff[255];
     int bytes;
-    
+    char name[32];
     while(1){
     
         memset(buff,0,sizeof(buff));
@@ -94,12 +94,16 @@ void *ThreadBehavior(void *t_data)
                 while (getline(usersFile,line)){
                     if (s.compare(line.substr(0,line.rfind(":")))== 0){
                         finded = true;
+                        
                         ret = "SIGN_IN:OK:";
                         ret.append(line.substr(line.rfind(":")+1,line.length()));
                         for(int i=0; i<QUEUE_SIZE; i++){
                             if(clients[i]){
                                 if(clients[i]->sockfd == (*th_data).socket){
                                     clients[i]->NRGG=std::stoi(line.substr(line.rfind(":")+1,line.length()));
+                                    s=s.substr(0,s.find(":"));
+                                    strcpy(clients[i]->name, s.c_str());;
+                                    strcpy(name,clients[i]->name);
                                     
                                 }
                             }
@@ -186,20 +190,24 @@ void *ThreadBehavior(void *t_data)
         
         if(strncmp(buff,"SEND_MSG",8)==0){
             std::string s = buff;
-            prtinf("%s\n",s);
+           
             s = s.substr(s.find(":")+1,s.length());
-            prtinf("%s\n",s);
+            
             std::string GGReceivernr = s.substr(0,s.find(":"));
-            prtinf("%s\n",GGReceivernr);
+            
             int ggrecipient=std::stoi(GGReceivernr);
             s = s.substr(s.find(":")+1,s.length());
-            prtinf("%s\n",s);
+            
             for(int i=0; i<QUEUE_SIZE; i++){
                 if(clients[i]){
                     if(clients[i]->NRGG == ggrecipient){
-                         strcpy(buff, s.c_str());
-                       
-                        send_message(buff, ggrecipient);
+                        char result[255];
+                        
+                        strcpy(buff, s.c_str());
+                        strcat(result,name);
+                        strcat(result,": ");
+                        strcat(result,buff);
+                        send_message(result, ggrecipient);
                                     
                                 }
                             }

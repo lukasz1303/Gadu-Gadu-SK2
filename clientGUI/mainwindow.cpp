@@ -43,7 +43,7 @@ void MainWindow::on_sendButton_clicked()
     msg2.prepend(std::to_string(getReceiver()).c_str());
     msg2.prepend("SEND_MSG:");
     printf("%d",getReceiver());
-
+    msg.prepend("Ty: ");
 
     msg = msg.left(msg.lastIndexOf("\n\n"));
     tcpSocket->write(msg2);
