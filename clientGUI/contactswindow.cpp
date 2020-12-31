@@ -24,6 +24,9 @@ void ContactsWindow::on_listWidget_itemClicked(QListWidgetItem *item)
     mainWindow = new MainWindow(this);
     mainWindow->setWindowTitle(item->text());
     mainWindow->setSocket(tcpSocket);
+
+    mainWindow->setReceiver(numbersGG[ui->listWidget->row(item)]);
+
     mainWindow->show();
 }
 
@@ -56,9 +59,11 @@ void ContactsWindow::readData(){
             s = s.substr(s.find("CONTACT")+8,s.length());
             QString name = QString::fromStdString(s.substr(0,s.find(":")));
             std::string gg = s.substr(s.find(":")+1,s.length());
+
             int number = std::stoi(gg.substr(0,gg.find("\n")));
             QListWidgetItem *item = new QListWidgetItem(name);
             numbersGG.push_back(number);
+
             ui->listWidget->addItem(item);
         }
     }

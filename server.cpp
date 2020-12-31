@@ -21,7 +21,7 @@
 typedef struct{
     struct sockaddr_in address;
     int sockfd;
-    int id;
+    int NRGG;
     char name[32];
 } client_t;
 
@@ -38,7 +38,7 @@ void send_message(char *s, int sfd){
 
 	for(int i=0; i<QUEUE_SIZE; i++){
 		if(clients[i]){
-			if(clients[i]->sockfd != sfd){
+			if(clients[i]->NRGG == sfd){
                 write(clients[i]->sockfd, s, strlen(s));
             }
         }
@@ -51,7 +51,7 @@ void *ThreadBehavior(void *t_data)
     struct thread_data_t *th_data = (struct thread_data_t*)t_data;
     char buff[255];
     int bytes;
-
+    
     while(1){
     
         memset(buff,0,sizeof(buff));
@@ -96,6 +96,14 @@ void *ThreadBehavior(void *t_data)
                         finded = true;
                         ret = "SIGN_IN:OK:";
                         ret.append(line.substr(line.rfind(":")+1,line.length()));
+                        for(int i=0; i<QUEUE_SIZE; i++){
+                            if(clients[i]){
+                                if(clients[i]->sockfd == (*th_data).socket){
+                                    clients[i]->NRGG=std::stoi(line.substr(line.rfind(":")+1,line.length()));
+                                    
+                                }
+                            }
+                        }
                         break;
                     }
                 }   
@@ -176,8 +184,28 @@ void *ThreadBehavior(void *t_data)
             contactsFile.close();
         }
         
+        if(strncmp(buff,"SEND_MSG",8)==0){
+            std::string s = buff;
+            prtinf("%s\n",s);
+            s = s.substr(s.find(":")+1,s.length());
+            prtinf("%s\n",s);
+            std::string GGReceivernr = s.substr(0,s.find(":"));
+            prtinf("%s\n",GGReceivernr);
+            int ggrecipient=std::stoi(GGReceivernr);
+            s = s.substr(s.find(":")+1,s.length());
+            prtinf("%s\n",s);
+            for(int i=0; i<QUEUE_SIZE; i++){
+                if(clients[i]){
+                    if(clients[i]->NRGG == ggrecipient){
+                         strcpy(buff, s.c_str());
+                       
+                        send_message(buff, ggrecipient);
+                                    
+                                }
+                            }
+                        }
             
-        send_message(buff, (*th_data).socket);
+        }
     }
     free(t_data);
     pthread_exit(NULL);
@@ -252,7 +280,7 @@ int main(int argc, char* argv[])
        
         client_t *client = (client_t *)malloc(sizeof(client_t));
         client->sockfd = connection_socket_descriptor;
-        client->id = id++;
+        //client->id = id++;
        
         for(int i=0; i < QUEUE_SIZE; i++){
             if(clients[i]==NULL){

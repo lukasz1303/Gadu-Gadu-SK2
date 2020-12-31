@@ -17,6 +17,12 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void setSocket(QTcpSocket *socket);
+    int getReceiver(){
+        return receiver;
+    }
+    void setReceiver(int ggnumber){
+        this->receiver=ggnumber;
+    }
 
 private slots:
 
@@ -28,6 +34,6 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QTcpSocket *tcpSocket;
-
+    int receiver;
 };
 #endif // MAINWINDOW_H

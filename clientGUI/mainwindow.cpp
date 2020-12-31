@@ -38,8 +38,15 @@ void MainWindow::displayError(QAbstractSocket::SocketError socketError){
 void MainWindow::on_sendButton_clicked()
 {
     QByteArray msg =ui->textEdit->toMarkdown().toUtf8();
+    QByteArray msg2=msg;
+    msg2.prepend(":");
+    msg2.prepend(std::to_string(getReceiver()).c_str());
+    msg2.prepend("SEND_MSG:");
+    printf("%d",getReceiver());
+
+
     msg = msg.left(msg.lastIndexOf("\n\n"));
-    tcpSocket->write(msg);
+    tcpSocket->write(msg2);
     ui->textBrowser->insertPlainText(msg);
     ui->textBrowser->insertPlainText("\n");
     ui->textEdit->clear();

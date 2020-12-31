@@ -37,6 +37,7 @@ private:
     char buf[100];
     bool reading = false;
     std::vector<int> numbersGG;
+    std::vector<QString> names;
 };
 
 #endif // CONTACTSWINDOW_H
