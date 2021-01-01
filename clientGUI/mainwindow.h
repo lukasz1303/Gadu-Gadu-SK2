@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include <QtDebug>
 #include <QtNetwork>
-
+#include<QKeyEvent>
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -24,6 +24,9 @@ public:
         this->receiver=ggnumber;
     }
 
+
+    bool eventFilter(QObject *object, QEvent *event);
+    void ReadLastMessages(int numberOfMessages);
 private slots:
 
     void displayError(QAbstractSocket::SocketError socketError);
@@ -35,5 +38,7 @@ private:
     Ui::MainWindow *ui;
     QTcpSocket *tcpSocket;
     int receiver;
+
+
 };
 #endif // MAINWINDOW_H

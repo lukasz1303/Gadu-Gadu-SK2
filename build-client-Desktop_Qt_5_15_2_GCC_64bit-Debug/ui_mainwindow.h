@@ -88,7 +88,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        sendButton->setDefault(false);
+        sendButton->setDefault(true);
 
 
         QMetaObject::connectSlotsByName(MainWindow);

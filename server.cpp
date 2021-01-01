@@ -51,6 +51,7 @@ void *ThreadBehavior(void *t_data)
     struct thread_data_t *th_data = (struct thread_data_t*)t_data;
     char buff[255];
     int bytes;
+    int ggsender;
     char name[32];
     while(1){
     
@@ -97,6 +98,7 @@ void *ThreadBehavior(void *t_data)
                         
                         ret = "SIGN_IN:OK:";
                         ret.append(line.substr(line.rfind(":")+1,line.length()));
+                        ggsender=stoi(line.substr(line.rfind(":")+1,line.length()));
                         for(int i=0; i<QUEUE_SIZE; i++){
                             if(clients[i]){
                                 if(clients[i]->sockfd == (*th_data).socket){
@@ -209,10 +211,16 @@ void *ThreadBehavior(void *t_data)
             std::string GGReceivernr = s.substr(0,s.find(":"));
             
             int ggrecipient=std::stoi(GGReceivernr);
+            std::string savetohistory;
+            
+            
             s = s.substr(s.find(":")+1,s.length());
             s = s.substr(0,s.find("\n"));
+            savetohistory=s;
+            
             for(int i=0; i<QUEUE_SIZE; i++){
                 if(clients[i]){
+                    
                     if(clients[i]->NRGG == ggrecipient){
                         std::string result = name;
                         result = result.append(":");
@@ -220,15 +228,83 @@ void *ThreadBehavior(void *t_data)
                         char result_array[result.length()+1];
                         strncpy(result_array, result.c_str(), sizeof(result_array));
                         result_array[result.length()] = '\n';
+                        
+                        
                         result_array[result.length()+1] = '\0';
+                        
                         send_message(result_array, ggrecipient);
                     }
                 }
             }
+            std::string filename;
+            if(ggrecipient>ggsender){
+                filename = std::to_string(ggrecipient)+":"+std::to_string(ggsender);
+            }
+            else{
+                filename = std::to_string(ggsender)+":"+std::to_string(ggrecipient);
+            }
+                std::string chathistoryFileName = "chathistory/" + filename;
+                std::fstream DoesExist;
+
+                DoesExist.open(chathistoryFileName, std::fstream::in | std::fstream::out | std::fstream::app);
+                if(!DoesExist){
+                    
+                  std::ofstream chatHistoryFile;
+                  chatHistoryFile.open(chathistoryFileName, std::ios_base::app);
+                    
+                }
+                DoesExist.close();
+                std::fstream Chathistory;
+                Chathistory.open(chathistoryFileName);
+                Chathistory.clear();
+                Chathistory.seekp(0, std::ios_base::end);
+                Chathistory << name<<":"<<savetohistory << std::endl;
+               
+                Chathistory.close();
             
         }
-        
+        if(strncmp(buff,"GET_HISTORY",11)==0){
+            std::string s =buff;
+            s=s.substr(s.find(":")+1,s.length());
+            int ggreciever=std::stoi(s.substr(0,s.find(":")));
+            s=s.substr(s.find(":")+1,s.length());
+            int numberofmessages=std::stoi(s.substr(0,s.length()));
+            
+            std::string filename;
+            if(ggreciever>ggsender){
+                filename = std::to_string(ggreciever)+":"+std::to_string(ggsender);
+            }
+            else{
+                filename = std::to_string(ggsender)+":"+std::to_string(ggreciever);
+            }
+                
+            std::ifstream historyFile;
+            std::string chathistoryFileName = "chathistory/" + filename;
+            historyFile.open(chathistoryFileName);
+            std::string line;  
+            char buff2[100];
+            if(historyFile.is_open()){
+            
+                     while (getline(historyFile,line)){
+                        memset(buff2,0,sizeof(buff2));
+                        s="";
+                        s.append(line);
+                        strncpy(buff2,s.c_str(),sizeof(buff2));
+                        printf("%s",s.c_str());
+                        buff2[s.length()]='\n';
+                        write((*th_data).socket, buff2, (s.length()+1)*sizeof(buff2[0]));
+                }
+            }
+                
+        }
     }
+    for(int i=0; i<QUEUE_SIZE; i++){
+        if(clients[i]){
+          if(clients[i]->sockfd == (*th_data).socket){
+                clients[i]=NULL;
+            }
+        }
+   }
     free(t_data);
     pthread_exit(NULL);
 }
