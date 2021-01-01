@@ -23,10 +23,9 @@ void ContactsWindow::on_listWidget_itemClicked(QListWidgetItem *item)
 {
     mainWindow = new MainWindow(this);
     mainWindow->setWindowTitle(item->text());
-    mainWindow->setSocket(tcpSocket);
-
+    disconnect(tcpSocket,&QIODevice::readyRead,0,0);
+    mainWindow->setSocket(tcpSocket);   
     mainWindow->setReceiver(numbersGG[ui->listWidget->row(item)]);
-
     mainWindow->show();
 }
 

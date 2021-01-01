@@ -197,21 +197,20 @@ void *ThreadBehavior(void *t_data)
             
             int ggrecipient=std::stoi(GGReceivernr);
             s = s.substr(s.find(":")+1,s.length());
-            
+             std::cout << "s = " << s << std::endl;
             for(int i=0; i<QUEUE_SIZE; i++){
                 if(clients[i]){
                     if(clients[i]->NRGG == ggrecipient){
                         char result[255];
-                        
+                        memset(result,0,sizeof(result));
                         strcpy(buff, s.c_str());
                         strcat(result,name);
                         strcat(result,": ");
                         strcat(result,buff);
                         send_message(result, ggrecipient);
-                                    
-                                }
-                            }
-                        }
+                    }
+                }
+            }
             
         }
     }

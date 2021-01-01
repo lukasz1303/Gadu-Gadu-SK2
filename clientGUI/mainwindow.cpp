@@ -23,11 +23,13 @@ void MainWindow::setSocket(QTcpSocket *socket)
 
 void MainWindow::readData(){
     char buf[100];
-    int n = tcpSocket->readLine(buf,100);
-    buf[n] = 0;
-    qDebug() << buf;
-    ui->textBrowser->insertPlainText(buf);
-    ui->textBrowser->insertPlainText("\n");
+    while(tcpSocket->canReadLine()){
+        memset(buf,0,sizeof(buf));
+        int n = tcpSocket->readLine(buf,100);
+        buf[n] = 0;
+        qDebug() << buf;
+        ui->textBrowser->insertPlainText(buf);
+    }
 }
 
 
