@@ -177,10 +177,23 @@ void *ThreadBehavior(void *t_data)
                     memset(buff2,0,sizeof(buff2));
                     s = "CONTACT:";
                     s.append(line);
+                    std::string status="offline";
+                    
+                    for(int i=0; i<QUEUE_SIZE; i++){
+                        if(clients[i]){
+                            if(clients[i]->NRGG == std::stoi(line.substr(line.find(":")+1,line.length())) ){
+                                status="online";
+                            }
+                        }
+                    }
+                    s.append(":");
+                    s.append(status);
+                    
                     strncpy(buff2,s.c_str(),sizeof(buff2));
                     buff2[s.length()]='\n';
                     write((*th_data).socket, buff2, (s.length()+1)*sizeof(buff2[0]));
-                }
+                    }
+                    
             } else {
                 printf("Nie można otworzyć pliku \"users\"\n");
             }
@@ -214,6 +227,7 @@ void *ThreadBehavior(void *t_data)
             }
             
         }
+        
     }
     free(t_data);
     pthread_exit(NULL);

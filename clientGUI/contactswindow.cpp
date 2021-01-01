@@ -59,8 +59,10 @@ void ContactsWindow::readData(){
             QString name = QString::fromStdString(s.substr(0,s.find(":")));
             std::string gg = s.substr(s.find(":")+1,s.length());
 
-            int number = std::stoi(gg.substr(0,gg.find("\n")));
-            QListWidgetItem *item = new QListWidgetItem(name);
+            int number  = std::stoi(gg.substr(0,gg.find(":")));
+            gg=gg.substr(gg.find(":")+1,gg.length());
+            QString status=QString::fromStdString(gg);
+            QListWidgetItem *item = new QListWidgetItem(name+" - "+status);
             numbersGG.push_back(number);
 
             ui->listWidget->addItem(item);
@@ -89,4 +91,11 @@ void ContactsWindow::loadContacts()
         infoDialog->show();
     }
 
+}
+
+void ContactsWindow::on_pushButton_3_clicked()
+{
+    numbersGG.clear();
+    ui->listWidget->clear();
+    loadContacts();
 }

@@ -29,6 +29,7 @@ public:
     QListWidget *listWidget;
     QPushButton *quitButton;
     QPushButton *addButton;
+    QPushButton *pushButton_3;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -93,14 +94,17 @@ public:
         listWidget->setPalette(palette1);
         quitButton = new QPushButton(centralwidget);
         quitButton->setObjectName(QString::fromUtf8("quitButton"));
-        quitButton->setGeometry(QRect(80, 510, 91, 31));
+        quitButton->setGeometry(QRect(270, 510, 111, 41));
         addButton = new QPushButton(centralwidget);
         addButton->setObjectName(QString::fromUtf8("addButton"));
-        addButton->setGeometry(QRect(220, 510, 91, 31));
+        addButton->setGeometry(QRect(140, 510, 111, 41));
+        pushButton_3 = new QPushButton(centralwidget);
+        pushButton_3->setObjectName(QString::fromUtf8("pushButton_3"));
+        pushButton_3->setGeometry(QRect(20, 510, 101, 41));
         ContactsWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(ContactsWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 394, 21));
+        menubar->setGeometry(QRect(0, 0, 394, 22));
         ContactsWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(ContactsWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
@@ -118,6 +122,7 @@ public:
         pushButton_2->setText(QCoreApplication::translate("ContactsWindow", "Grupy", nullptr));
         quitButton->setText(QCoreApplication::translate("ContactsWindow", "Zamknij", nullptr));
         addButton->setText(QCoreApplication::translate("ContactsWindow", "Dodaj", nullptr));
+        pushButton_3->setText(QCoreApplication::translate("ContactsWindow", "Refresh", nullptr));
     } // retranslateUi
 
 };

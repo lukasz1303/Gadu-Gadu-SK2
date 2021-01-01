@@ -237,6 +237,7 @@ DIST          = ../../../../Qt/5.15.2/gcc_64/mkspecs/features/spec_pre.prf \
 		../../../../Qt/5.15.2/gcc_64/mkspecs/features/qt_config.prf \
 		../../../../Qt/5.15.2/gcc_64/mkspecs/linux-g++/qmake.conf \
 		../../../../Qt/5.15.2/gcc_64/mkspecs/features/spec_post.prf \
+		../clientGUI/.qmake.stash \
 		../../../../Qt/5.15.2/gcc_64/mkspecs/features/exclusive_builds.prf \
 		../../../../Qt/5.15.2/gcc_64/mkspecs/features/toolchain.prf \
 		../../../../Qt/5.15.2/gcc_64/mkspecs/features/default_pre.prf \
@@ -438,6 +439,7 @@ Makefile: ../clientGUI/client.pro ../../../../Qt/5.15.2/gcc_64/mkspecs/linux-g++
 		../../../../Qt/5.15.2/gcc_64/mkspecs/features/qt_config.prf \
 		../../../../Qt/5.15.2/gcc_64/mkspecs/linux-g++/qmake.conf \
 		../../../../Qt/5.15.2/gcc_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		../../../../Qt/5.15.2/gcc_64/mkspecs/features/exclusive_builds.prf \
 		../../../../Qt/5.15.2/gcc_64/mkspecs/features/toolchain.prf \
 		../../../../Qt/5.15.2/gcc_64/mkspecs/features/default_pre.prf \
@@ -617,6 +619,7 @@ Makefile: ../clientGUI/client.pro ../../../../Qt/5.15.2/gcc_64/mkspecs/linux-g++
 ../../../../Qt/5.15.2/gcc_64/mkspecs/features/qt_config.prf:
 ../../../../Qt/5.15.2/gcc_64/mkspecs/linux-g++/qmake.conf:
 ../../../../Qt/5.15.2/gcc_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 ../../../../Qt/5.15.2/gcc_64/mkspecs/features/exclusive_builds.prf:
 ../../../../Qt/5.15.2/gcc_64/mkspecs/features/toolchain.prf:
 ../../../../Qt/5.15.2/gcc_64/mkspecs/features/default_pre.prf:
@@ -2710,7 +2713,34 @@ addcontactwindow.o: ../clientGUI/addcontactwindow.cpp ../clientGUI/addcontactwin
 		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QDialog \
 		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qdialog.h \
 		../clientGUI/user.h \
-		ui_addcontactwindow.h
+		ui_addcontactwindow.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QApplication \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qapplication.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtGui/qguiapplication.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtGui/qinputmethod.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QLabel \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qlabel.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qframe.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QMenuBar \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qmenubar.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qmenu.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qaction.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qactiongroup.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QPushButton \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qpushbutton.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qabstractbutton.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QStatusBar \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qstatusbar.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QTextEdit \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qtextedit.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtGui/qtextdocument.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtGui/qtextoption.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtGui/qtextcursor.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtGui/qtextformat.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtGui/qpen.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QWidget
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o addcontactwindow.o ../clientGUI/addcontactwindow.cpp
 
 contactswindow.o: ../clientGUI/contactswindow.cpp ../clientGUI/contactswindow.h \
@@ -3032,7 +3062,24 @@ contactswindow.o: ../clientGUI/contactswindow.cpp ../clientGUI/contactswindow.h 
 		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QDialog \
 		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qdialog.h \
 		../clientGUI/user.h \
-		ui_contactswindow.h
+		ui_contactswindow.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QApplication \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qapplication.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtGui/qguiapplication.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtGui/qinputmethod.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QListWidget \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QMenuBar \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qmenubar.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qmenu.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qaction.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qactiongroup.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QPushButton \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qpushbutton.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qabstractbutton.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QStatusBar \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qstatusbar.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QWidget
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o contactswindow.o ../clientGUI/contactswindow.cpp
 
 infodialog.o: ../clientGUI/infodialog.cpp ../clientGUI/infodialog.h \
@@ -3140,7 +3187,22 @@ infodialog.o: ../clientGUI/infodialog.cpp ../clientGUI/infodialog.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtCore/qfiledevice.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtGui/qvector2d.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtGui/qtouchdevice.h \
-		ui_infodialog.h
+		ui_infodialog.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtCore/QVariant \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QApplication \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qapplication.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtCore/qcoreapplication.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtCore/qeventloop.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtGui/qguiapplication.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtGui/qinputmethod.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QLabel \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qlabel.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qframe.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QPushButton \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qpushbutton.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qabstractbutton.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtGui/qicon.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o infodialog.o ../clientGUI/infodialog.cpp
 
 loginwindow.o: ../clientGUI/loginwindow.cpp ../clientGUI/loginwindow.h \
@@ -3464,7 +3526,32 @@ loginwindow.o: ../clientGUI/loginwindow.cpp ../clientGUI/loginwindow.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qdialog.h \
 		../clientGUI/user.h \
 		../clientGUI/signupwindow.h \
-		ui_loginwindow.h
+		ui_loginwindow.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QApplication \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qapplication.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtGui/qguiapplication.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtGui/qinputmethod.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QLabel \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qlabel.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QLineEdit \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qlineedit.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtGui/qtextcursor.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtGui/qtextformat.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtGui/qpen.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtGui/qtextoption.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QMenuBar \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qmenubar.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qmenu.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qaction.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qactiongroup.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QPushButton \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qpushbutton.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qabstractbutton.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QTextEdit \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qtextedit.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtGui/qtextdocument.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QWidget
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o loginwindow.o ../clientGUI/loginwindow.cpp
 
 main.o: ../clientGUI/main.cpp ../clientGUI/mainwindow.h \
@@ -4094,6 +4181,33 @@ mainwindow.o: ../clientGUI/mainwindow.cpp ../clientGUI/mainwindow.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtNetwork/qudpsocket.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtNetwork/qtnetworkversion.h \
 		ui_mainwindow.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QApplication \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qapplication.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtGui/qguiapplication.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtGui/qinputmethod.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QMenuBar \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qmenubar.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qmenu.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qaction.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qactiongroup.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QPushButton \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qpushbutton.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qabstractbutton.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QStatusBar \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qstatusbar.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QTextBrowser \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qtextbrowser.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qtextedit.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qframe.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtGui/qtextdocument.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtGui/qtextoption.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtGui/qtextcursor.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtGui/qtextformat.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtGui/qpen.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QTextEdit \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QWidget \
 		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QMdiSubWindow \
 		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qmdisubwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../clientGUI/mainwindow.cpp
@@ -4398,7 +4512,34 @@ signupwindow.o: ../clientGUI/signupwindow.cpp ../clientGUI/signupwindow.h \
 		../clientGUI/infodialog.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QDialog \
 		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qdialog.h \
-		ui_signupwindow.h
+		ui_signupwindow.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QApplication \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qapplication.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtGui/qguiapplication.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtGui/qinputmethod.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QLabel \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qlabel.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qframe.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QMenuBar \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qmenubar.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qmenu.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qaction.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qactiongroup.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QPushButton \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qpushbutton.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qabstractbutton.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QStatusBar \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qstatusbar.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QTextEdit \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qtextedit.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtGui/qtextdocument.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtGui/qtextoption.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtGui/qtextcursor.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtGui/qtextformat.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtGui/qpen.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QWidget
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o signupwindow.o ../clientGUI/signupwindow.cpp
 
 user.o: ../clientGUI/user.cpp ../clientGUI/user.h

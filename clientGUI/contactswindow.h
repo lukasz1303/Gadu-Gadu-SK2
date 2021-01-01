@@ -27,6 +27,8 @@ private slots:
     void on_addButton_clicked();
     void readData();
 
+    void on_pushButton_3_clicked();
+
 private:
     void loadContacts();
     Ui::ContactsWindow *ui;

@@ -105,10 +105,13 @@ public:
         LoginWIndow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(LoginWIndow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 462, 21));
+        menubar->setGeometry(QRect(0, 0, 462, 22));
         LoginWIndow->setMenuBar(menubar);
 
         retranslateUi(LoginWIndow);
+
+        signInButton->setDefault(true);
+
 
         QMetaObject::connectSlotsByName(LoginWIndow);
     } // setupUi

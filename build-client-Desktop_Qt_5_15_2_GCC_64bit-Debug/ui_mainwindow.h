@@ -65,7 +65,7 @@ public:
         textBrowser->setPalette(palette1);
         sendButton = new QPushButton(centralwidget);
         sendButton->setObjectName(QString::fromUtf8("sendButton"));
-        sendButton->setGeometry(QRect(240, 230, 80, 24));
+        sendButton->setGeometry(QRect(10, 230, 251, 51));
         textEdit = new QTextEdit(centralwidget);
         textEdit->setObjectName(QString::fromUtf8("textEdit"));
         textEdit->setGeometry(QRect(33, 179, 291, 41));
@@ -76,17 +76,20 @@ public:
         textEdit->setPalette(palette2);
         closeButton = new QPushButton(centralwidget);
         closeButton->setObjectName(QString::fromUtf8("closeButton"));
-        closeButton->setGeometry(QRect(40, 230, 80, 24));
+        closeButton->setGeometry(QRect(270, 240, 81, 31));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 365, 21));
+        menubar->setGeometry(QRect(0, 0, 365, 22));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
         MainWindow->setStatusBar(statusbar);
 
         retranslateUi(MainWindow);
+
+        sendButton->setDefault(false);
+
 
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
