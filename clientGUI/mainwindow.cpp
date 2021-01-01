@@ -22,10 +22,10 @@ void MainWindow::setSocket(QTcpSocket *socket)
 }
 
 void MainWindow::readData(){
-    char buf[100];
+    char buf[1000];
     while(tcpSocket->canReadLine()){
         memset(buf,0,sizeof(buf));
-        int n = tcpSocket->readLine(buf,100);
+        int n = tcpSocket->readLine(buf,1000);
         buf[n] = 0;
         qDebug() << buf;
         ui->textBrowser->insertPlainText(buf);
@@ -47,7 +47,7 @@ void MainWindow::on_sendButton_clicked()
     printf("%d",getReceiver());
     msg.prepend("Ty: ");
 
-    msg = msg.left(msg.lastIndexOf("\n\n"));
+    msg = msg.left(msg.indexOf("\n"));
     tcpSocket->write(msg2);
     ui->textBrowser->insertPlainText(msg);
     ui->textBrowser->insertPlainText("\n");
