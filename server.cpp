@@ -193,6 +193,7 @@ void *ThreadBehavior(void *t_data)
                     
                     strncpy(buff2,s.c_str(),sizeof(buff2));
                     buff2[s.length()]='\n';
+                    buff2[s.length()+1]='\0';
                     write((*th_data).socket, buff2, (s.length()+1)*sizeof(buff2[0]));
                     }
                     
@@ -268,7 +269,7 @@ void *ThreadBehavior(void *t_data)
             s=s.substr(s.find(":")+1,s.length());
             int ggreciever=std::stoi(s.substr(0,s.find(":")));
             s=s.substr(s.find(":")+1,s.length());
-            int numberofmessages=std::stoi(s.substr(0,s.length()));
+            //int numberofmessages=std::stoi(s.substr(0,s.length()));
             
             std::string filename;
             if(ggreciever>ggsender){
@@ -292,7 +293,9 @@ void *ThreadBehavior(void *t_data)
                         strncpy(buff2,s.c_str(),sizeof(buff2));
                         printf("%s",s.c_str());
                         buff2[s.length()]='\n';
+                        buff2[s.length()+1]='\0';
                         write((*th_data).socket, buff2, (s.length()+1)*sizeof(buff2[0]));
+                        std::cout << buff2 << std::endl;
                 }
             }
                 

@@ -55,8 +55,7 @@ void MainWindow::readData(){
         buf[n] = 0;
         qDebug() << buf;
         ui->textBrowser->insertPlainText(buf);
-        ui->textBrowser->insertPlainText("\n");
-
+        ui->textBrowser->ensureCursorVisible();
     }
 }
 
@@ -92,6 +91,7 @@ void MainWindow::on_sendButton_clicked()
     tcpSocket->write(msg2);
     ui->textBrowser->insertPlainText(msg);
     ui->textBrowser->insertPlainText("\n");
+    ui->textBrowser->ensureCursorVisible();
     ui->textEdit->clear();
 }
 
