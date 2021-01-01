@@ -26,6 +26,8 @@ void ContactsWindow::on_listWidget_itemClicked(QListWidgetItem *item)
     disconnect(tcpSocket,&QIODevice::readyRead,0,0);
     mainWindow->setSocket(tcpSocket);   
     mainWindow->setReceiver(numbersGG[ui->listWidget->row(item)]);
+
+    mainWindow->ReadLastMessages(1);
     mainWindow->show();
 }
 

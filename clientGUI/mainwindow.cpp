@@ -8,17 +8,43 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     ui->textEdit->setPlaceholderText("Wprowadź wiadomość");
+    ui->textEdit->installEventFilter(this);
+
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
+bool MainWindow::eventFilter(QObject *object, QEvent *event)
+{
+    if (object == ui->textEdit && event->type() == QEvent::KeyPress)
+    {
+        QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+        if (keyEvent->key() == Qt::Key_Return)
+        {
+            on_sendButton_clicked();
 
+            return true;
+        }
+        else if(keyEvent->key() ==Qt::Key_Escape){
+            on_closeButton_clicked();//to w sumie troche glupie
+        }
+        else
+        {
+            return QMainWindow::eventFilter(object, event);
+        }
+    }
+    else
+    {
+        return QMainWindow::eventFilter(object, event);
+    }
+}
 void MainWindow::setSocket(QTcpSocket *socket)
 {
      tcpSocket = socket;
      connect(tcpSocket, &QIODevice::readyRead, this,&MainWindow::readData);
+
 }
 
 void MainWindow::readData(){
@@ -29,6 +55,8 @@ void MainWindow::readData(){
         buf[n] = 0;
         qDebug() << buf;
         ui->textBrowser->insertPlainText(buf);
+        ui->textBrowser->insertPlainText("\n");
+
     }
 }
 
@@ -36,7 +64,20 @@ void MainWindow::readData(){
 void MainWindow::displayError(QAbstractSocket::SocketError socketError){
     qDebug() << socketError;
 }
+void MainWindow::ReadLastMessages(int numberOfMessages)
+{
 
+        QByteArray msg = "GET_HISTORY:";
+
+        msg.append(std::to_string(getReceiver()).c_str());
+        msg.append(":");
+        printf("%d",getReceiver());
+        msg.append(std::to_string(numberOfMessages).c_str());
+        tcpSocket->write(msg);
+        readData();
+
+
+}
 void MainWindow::on_sendButton_clicked()
 {
     QByteArray msg =ui->textEdit->toMarkdown().toUtf8();
