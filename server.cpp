@@ -152,15 +152,36 @@ void *ThreadBehavior(void *t_data)
                     }
                 }
                 if(!finded){
-                    contactsFile.clear();
-                    contactsFile.seekp(0, std::ios_base::end);
-                    contactsFile << contact << std::endl;
-                    char buff2[20] = "ADD_CONT:OK";
-                    write((*th_data).socket, buff2, sizeof(buff2));
+                    bool signedUp = false;
+                    std::fstream usersFile;
+                    usersFile.open("users");
+                    
+                    if (usersFile.is_open()){
+                        std::string line;
+                        while (getline(usersFile,line)){
+                            if (contact.substr(contact.find(":")+1, contact.length()).compare(line.substr(line.rfind(":")+1, line.length())) == 0){
+                                signedUp = true;
+                            }
+                        }
+                    } else {
+                        printf("Nie można otworzyć pliku \"users\"\n");
+                    }
+                                 
+                    if(signedUp){    
+                        contactsFile.clear();
+                        contactsFile.seekp(0, std::ios_base::end);
+                        contactsFile << contact << std::endl;
+                        char buff2[20] = "ADD_CONT:OK";
+                        write((*th_data).socket, buff2, sizeof(buff2));
+                    } else {
+                        char buff2[20] = "ADD_CONT:NO_SIGNED";
+                        write((*th_data).socket, buff2, sizeof(buff2));
+                    }
+                    
                 }
                 
             } else {
-                printf("Nie można otworzyć pliku \"users\"\n");
+                printf("Nie można otworzyć pliku \"contacts\"\n");
             }
             contactsFile.close();
         }
@@ -295,7 +316,6 @@ void *ThreadBehavior(void *t_data)
                         buff2[s.length()]='\n';
                         buff2[s.length()+1]='\0';
                         write((*th_data).socket, buff2, (s.length()+1)*sizeof(buff2[0]));
-                        std::cout << buff2 << std::endl;
                 }
             }
                 

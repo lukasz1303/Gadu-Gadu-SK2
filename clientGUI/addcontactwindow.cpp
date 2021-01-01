@@ -37,6 +37,11 @@ void AddContactWindow::readData(){
         infoDialog->setLabelText("Już istnieje znajomy o takiej nazwie lub numerze GG");
         infoDialog->show();
     }
+    else if(strcmp(buf, "ADD_CONT:NO_SIGNED") == 0){
+        infoDialog = new InfoDialog(this);
+        infoDialog->setLabelText("Nie istnieje osoba o takim numerze GG");
+        infoDialog->show();
+    }
 }
 void AddContactWindow::on_addButton_clicked()
 {
@@ -51,12 +56,19 @@ void AddContactWindow::on_addButton_clicked()
         QString name = ui->nameTextEdit->toPlainText();
         QString number = ui->numberTextEdit->toPlainText();
         User *user = user->getInstance();
-        msg.append(QString::number(user->getNumberGG()));
-        msg.append(":");
-        msg.append(name);
-        msg.append(":");
-        msg.append(number);
-        tcpSocket->write(msg.toLatin1());
+        if(number.toInt() == user->getNumberGG()){
+            infoDialog = new InfoDialog(this);
+            infoDialog->setLabelText("Podałeś własny numer GG");
+            infoDialog->show();
+        } else{
+            msg.append(QString::number(user->getNumberGG()));
+            msg.append(":");
+            msg.append(name);
+            msg.append(":");
+            msg.append(number);
+            tcpSocket->write(msg.toLatin1());
+        }
+
 
     } else {
         infoDialog = new InfoDialog(this);

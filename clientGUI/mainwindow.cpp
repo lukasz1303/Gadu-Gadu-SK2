@@ -28,7 +28,7 @@ bool MainWindow::eventFilter(QObject *object, QEvent *event)
             return true;
         }
         else if(keyEvent->key() ==Qt::Key_Escape){
-            on_closeButton_clicked();//to w sumie troche glupie
+            on_closeButton_clicked();//to w sumie troche glupie - tak
         }
         else
         {
