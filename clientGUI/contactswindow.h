@@ -20,7 +20,7 @@ public:
     explicit ContactsWindow(QWidget *parent = nullptr);
     ~ContactsWindow();
     void setSocket(QTcpSocket *socket);
-
+    QString myname;
 private slots:
     void on_quitButton_clicked();
     void on_listWidget_itemClicked(QListWidgetItem *item);

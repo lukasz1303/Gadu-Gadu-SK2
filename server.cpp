@@ -287,7 +287,7 @@ void *ThreadBehavior(void *t_data)
                 Chathistory.open(chathistoryFileName);
                 Chathistory.clear();
                 Chathistory.seekp(0, std::ios_base::end);
-                Chathistory << name<<":"<<savetohistory << std::endl;
+                Chathistory << std::to_string(ggsender)<<":"<<savetohistory << std::endl;
                
                 Chathistory.close();
             

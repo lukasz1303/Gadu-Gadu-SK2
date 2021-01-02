@@ -1321,6 +1321,7 @@ moc_contactswindow.cpp: ../clientGUI/contactswindow.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtNetwork/qsslkey.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtNetwork/qudpsocket.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtNetwork/qtnetworkversion.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtGui/QKeyEvent \
 		../clientGUI/addcontactwindow.h \
 		../clientGUI/infodialog.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QDialog \
@@ -1754,6 +1755,7 @@ moc_loginwindow.cpp: ../clientGUI/loginwindow.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qtabbar.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qrubberband.h \
 		../clientGUI/mainwindow.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtGui/QKeyEvent \
 		../clientGUI/addcontactwindow.h \
 		../clientGUI/infodialog.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QDialog \
@@ -2062,6 +2064,7 @@ moc_mainwindow.cpp: ../clientGUI/mainwindow.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtNetwork/qsslkey.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtNetwork/qudpsocket.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtNetwork/qtnetworkversion.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtGui/QKeyEvent \
 		moc_predefs.h \
 		../../../../Qt/5.15.2/gcc_64/bin/moc
 	/home/jan/Qt/5.15.2/gcc_64/bin/moc $(DEFINES) --include /home/jan/Desktop/github/Gadu-Gadu-SK2/build-client-Desktop_Qt_5_15_2_GCC_64bit-Debug/moc_predefs.h -I/home/jan/Qt/5.15.2/gcc_64/mkspecs/linux-g++ -I/home/jan/Desktop/github/Gadu-Gadu-SK2/clientGUI -I/home/jan/Qt/5.15.2/gcc_64/include -I/home/jan/Qt/5.15.2/gcc_64/include/QtWidgets -I/home/jan/Qt/5.15.2/gcc_64/include/QtGui -I/home/jan/Qt/5.15.2/gcc_64/include/QtNetwork -I/home/jan/Qt/5.15.2/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../clientGUI/mainwindow.h -o moc_mainwindow.cpp
@@ -3057,6 +3060,7 @@ contactswindow.o: ../clientGUI/contactswindow.cpp ../clientGUI/contactswindow.h 
 		../../../../Qt/5.15.2/gcc_64/include/QtNetwork/qsslkey.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtNetwork/qudpsocket.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtNetwork/qtnetworkversion.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtGui/QKeyEvent \
 		../clientGUI/addcontactwindow.h \
 		../clientGUI/infodialog.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QDialog \
@@ -3520,6 +3524,7 @@ loginwindow.o: ../clientGUI/loginwindow.cpp ../clientGUI/loginwindow.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qtabbar.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qrubberband.h \
 		../clientGUI/mainwindow.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtGui/QKeyEvent \
 		../clientGUI/addcontactwindow.h \
 		../clientGUI/infodialog.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QDialog \
@@ -3852,6 +3857,7 @@ main.o: ../clientGUI/main.cpp ../clientGUI/mainwindow.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtNetwork/qsslkey.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtNetwork/qudpsocket.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtNetwork/qtnetworkversion.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtGui/QKeyEvent \
 		../clientGUI/loginwindow.h \
 		../clientGUI/contactswindow.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QListWidgetItem \
@@ -4180,6 +4186,7 @@ mainwindow.o: ../clientGUI/mainwindow.cpp ../clientGUI/mainwindow.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtNetwork/qsslkey.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtNetwork/qudpsocket.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtNetwork/qtnetworkversion.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtGui/QKeyEvent \
 		ui_mainwindow.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QApplication \
 		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qapplication.h \

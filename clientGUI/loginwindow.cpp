@@ -38,6 +38,7 @@ void LoginWindow::readData(){
         disconnect(tcpSocket,&QIODevice::readyRead,0,0);
         contactsWindows = new ContactsWindow(this);
         contactsWindows->setSocket(tcpSocket);
+        contactsWindows->myname=login;
         contactsWindows->show();
     } else if(strcmp(buf, "SIGN_IN:ERROR") == 0){
         infoDialog = new InfoDialog(this);
@@ -57,8 +58,9 @@ void LoginWindow::on_signInButton_clicked()
         }
         QString msg = "SIGN_IN:";
         QRegExp re("[^A-Za-z0-9]");
-        QString login = ui->loginTextEdit->toPlainText();
+        this->login = ui->loginTextEdit->toPlainText();
         QString password = ui->passwordLineEdit->text();
+
         if(re.indexIn(login)<0 && re.indexIn(password)<0)
         {
             msg.append(login);

@@ -24,8 +24,12 @@ void ContactsWindow::on_listWidget_itemClicked(QListWidgetItem *item)
     int index = ui->listWidget->row(item);
     mainWindows.at(index)->setWindowTitle(names.at(index));
     //disconnect(tcpSocket,&QIODevice::readyRead,0,0);
+    mainWindows.at(index)->clear();
     mainWindows.at(index)->setSocket(tcpSocket);
+
     mainWindows.at(index)->setReceiver(numbersGG[index]);
+    mainWindows.at(index)->reveivername=names[index];
+    mainWindows.at(index)->myname=this->myname;
     mainWindows.at(index)->ReadLastMessages(1);
     mainWindows.at(index)->show();
 }
@@ -87,7 +91,23 @@ void ContactsWindow::readData(){
             s = s.substr(s.find("RECV_HIS")+9,s.length());
             QString receiverGG = QString::fromStdString(s.substr(0,s.find(":")));
             int index = std::distance(numbersGG.begin() ,std::find(numbersGG.begin(), numbersGG.end(), receiverGG.toInt()));
-            mainWindows.at(index)->setText(QByteArray::fromStdString(s.substr(s.find(":")+1,s.length())));
+            s=(s.substr(s.find(":")+1,s.length()));
+            int nr1;
+            nr1=std::stoi(s.substr(0,s.find(":")));
+            s=s.substr(s.find(":"),s.length());
+            qDebug()<<nr1;
+            if(nr1==mainWindows.at(index)->getReceiver()){
+                s=(names[index]).toStdString()+s;
+
+
+            }
+            else{
+                s=mainWindows.at(index)->myname.toStdString()+s;
+
+
+            }
+
+            mainWindows.at(index)->setText(QByteArray::fromStdString(s));
 
         }
     }

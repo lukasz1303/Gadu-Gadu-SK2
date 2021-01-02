@@ -22,7 +22,10 @@ public:
     void setText(QByteArray buf);
     bool eventFilter(QObject *object, QEvent *event);
     void ReadLastMessages(int numberOfMessages);
-
+    QString myname;
+    QString reveivername;
+    bool readhistory=false;
+    void clear();
 signals:
     void sendMessage(QByteArray buf);
 
