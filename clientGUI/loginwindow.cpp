@@ -45,6 +45,11 @@ void LoginWindow::readData(){
         infoDialog->setLabelText("Podano nieprawidłowy login lub hasło");
         infoDialog->show();
     }
+    else if(strcmp(buf,"SIGN_IN:LOGGED")==0){
+        infoDialog = new InfoDialog(this);
+        infoDialog->setLabelText("To konto jest w tej chwili w uzytku - wyloguj sie z pozostalych urzadzen by z niego korzystac!");
+        infoDialog->show();
+    }
 }
 
 void LoginWindow::on_signInButton_clicked()
