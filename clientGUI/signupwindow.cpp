@@ -6,6 +6,7 @@ SignUpWindow::SignUpWindow(QWidget *parent) :
     ui(new Ui::SignUpWindow)
 {
     ui->setupUi(this);
+    connect(this, SIGNAL(showParent()), parent, SLOT(showWindow()));
 }
 
 SignUpWindow::~SignUpWindow()
@@ -73,6 +74,7 @@ void SignUpWindow::readData(){
         infoDialog->setLabelText("Rejestracja zakończona pomyślnie");
         disconnect(tcpSocket,&QIODevice::readyRead,0,0);
         hide();
+        emit showParent();
         infoDialog->show();
     } else {
         infoDialog = new InfoDialog(this);

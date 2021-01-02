@@ -6,6 +6,7 @@ AddContactWindow::AddContactWindow(QWidget *parent) :
     ui(new Ui::AddContactWindow)
 {
     ui->setupUi(this);
+    connect(this, SIGNAL(sendMessage(QByteArray)), parent, SLOT(sendMessageToServer(QByteArray)));
 }
 
 AddContactWindow::~AddContactWindow()

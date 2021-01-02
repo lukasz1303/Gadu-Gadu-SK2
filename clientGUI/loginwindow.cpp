@@ -105,5 +105,11 @@ void LoginWindow::on_signUpButton_clicked()
     reading = false;
     signUpWindow->setSocket(tcpSocket);
     signUpWindow->show();
+    hide();
+}
+
+void LoginWindow::showWindow()
+{
+    show();
 }
 

@@ -39,7 +39,6 @@ private:
     InfoDialog *infoDialog;
     AddContactWindow *addContactWindow;
     char buf[100];
-    bool reading = false;
     std::vector<int> numbersGG;
     std::vector<QString> names;
     std::vector<MainWindow *> mainWindows;

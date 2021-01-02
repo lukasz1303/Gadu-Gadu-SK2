@@ -22,6 +22,9 @@ private slots:
     void on_signUpButton_clicked();
     void readData();
 
+signals:
+    void showParent();
+
 private:
     Ui::SignUpWindow *ui;
     QTcpSocket *tcpSocket;

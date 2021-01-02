@@ -117,12 +117,9 @@ void ContactsWindow::loadContacts()
 {
     if(tcpSocket->state() != QAbstractSocket::ConnectedState){
         tcpSocket->connectToHost("127.0.0.1", 1234);
+        connect(tcpSocket, &QIODevice::readyRead, this,&ContactsWindow::readData);
     }
     if(tcpSocket->state() == QAbstractSocket::ConnectedState){
-        if (!reading)
-        {
-            connect(tcpSocket, &QIODevice::readyRead, this,&ContactsWindow::readData);
-        }
         QString msg = "GET_CONT:";
         User *user = user->getInstance();
         msg.append(QString::number(user->getNumberGG()));
@@ -147,6 +144,18 @@ void ContactsWindow::on_pushButton_3_clicked()
 void ContactsWindow::sendMessageToServer(QByteArray buf)
 {
     qDebug() << buf;
-    tcpSocket->write(buf);
+    if(tcpSocket->state() != QAbstractSocket::ConnectedState){
+        tcpSocket->connectToHost("127.0.0.1", 1234);
+        if(tcpSocket->state() == QAbstractSocket::ConnectedState){
+            connect(tcpSocket, &QIODevice::readyRead, this,&ContactsWindow::readData);
+        }
+    }
+    if(tcpSocket->state() == QAbstractSocket::ConnectedState){
+        tcpSocket->write(buf);
+    } else {
+        infoDialog = new InfoDialog(this);
+        infoDialog->setLabelText("Brak połączenia z serwerem");
+        infoDialog->show();
+    }
 }
 

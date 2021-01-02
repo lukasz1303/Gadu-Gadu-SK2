@@ -27,6 +27,9 @@ private slots:
 
     void on_cancelButton_clicked();
 
+signals:
+    void sendMessage(QByteArray buf);
+
 private:
     Ui::AddContactWindow *ui;
     QTcpSocket *tcpSocket;

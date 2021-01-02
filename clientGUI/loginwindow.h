@@ -29,6 +29,9 @@ private slots:
     void on_signInButton_clicked();
     void on_signUpButton_clicked();
 
+public slots:
+    void showWindow();
+
 private:
     Ui::LoginWIndow *ui;
     QTcpSocket *tcpSocket;
