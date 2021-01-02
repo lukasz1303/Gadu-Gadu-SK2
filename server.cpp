@@ -17,7 +17,7 @@
 
 #define SERVER_PORT 1234
 #define QUEUE_SIZE 5
-
+static unsigned int clientCount = 0;
 typedef struct{
     struct sockaddr_in address;
     int sockfd;
@@ -51,6 +51,7 @@ void *ThreadBehavior(void *t_data)
     pthread_detach(pthread_self());
     struct thread_data_t *th_data = (struct thread_data_t*)t_data;
     char buff[255];
+    clientCount++;
     int bytes;
     int ggsender;
     char name[32];
@@ -358,6 +359,7 @@ void *ThreadBehavior(void *t_data)
    }
     close((*th_data).socket);
     free(t_data);
+    clientCount--;
     pthread_exit(NULL);
 }
 
@@ -418,6 +420,11 @@ int main(int argc, char* argv[])
     while(1)
     {
         connection_socket_descriptor = accept(server_socket_descriptor, NULL, NULL);
+        if((clientCount) == QUEUE_SIZE){
+			printf("Maksymalna ilosc GaduGadaczy! Polaczenie odrzucone \n");
+			close(connection_socket_descriptor);
+			continue;
+		}
         if (connection_socket_descriptor < 0)
         {
             fprintf(stderr, "%s: Błąd przy próbie utworzenia gniazda dla połączenia.\n", argv[0]);

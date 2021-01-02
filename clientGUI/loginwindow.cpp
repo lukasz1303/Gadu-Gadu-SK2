@@ -22,6 +22,13 @@ LoginWindow::~LoginWindow()
 }
 
 void LoginWindow::displayError(QAbstractSocket::SocketError socketError){
+    if(socketError==QAbstractSocket::RemoteHostClosedError){
+        infoDialog = new InfoDialog(this);
+        infoDialog->setLabelText("Serwer ulegl naglej awarii lub osiagnal limit uzytkownikow - sproboj pozniej");
+        infoDialog->show();
+    }
+
+
     qDebug() << socketError;
 }
 
