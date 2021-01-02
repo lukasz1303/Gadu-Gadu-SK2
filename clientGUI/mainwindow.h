@@ -17,16 +17,15 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void setSocket(QTcpSocket *socket);
-    int getReceiver(){
-        return receiver;
-    }
-    void setReceiver(int ggnumber){
-        this->receiver=ggnumber;
-    }
-
-
+    int getReceiver();
+    void setReceiver(int ggnumber);
+    void setText(QByteArray buf);
     bool eventFilter(QObject *object, QEvent *event);
     void ReadLastMessages(int numberOfMessages);
+
+signals:
+    void sendMessage(QByteArray buf);
+
 private slots:
 
     void displayError(QAbstractSocket::SocketError socketError);
@@ -38,6 +37,7 @@ private:
     Ui::MainWindow *ui;
     QTcpSocket *tcpSocket;
     int receiver;
+
 
 
 };

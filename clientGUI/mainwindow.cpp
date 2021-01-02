@@ -9,7 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ui->textEdit->setPlaceholderText("Wprowadź wiadomość");
     ui->textEdit->installEventFilter(this);
-
+    connect(this, SIGNAL(sendMessage(QByteArray)), parent, SLOT(sendMessageToServer(QByteArray)));
 }
 
 MainWindow::~MainWindow()
@@ -47,6 +47,22 @@ void MainWindow::setSocket(QTcpSocket *socket)
 
 }
 
+int MainWindow::getReceiver()
+{
+    return receiver;
+}
+
+void MainWindow::setReceiver(int ggnumber)
+{
+    this->receiver=ggnumber;
+}
+
+void MainWindow::setText(QByteArray buf)
+{
+    ui->textBrowser->insertPlainText(buf);
+    ui->textBrowser->ensureCursorVisible();
+}
+
 void MainWindow::readData(){
     char buf[1000];
     while(tcpSocket->canReadLine()){
@@ -72,13 +88,15 @@ void MainWindow::ReadLastMessages(int numberOfMessages)
         msg.append(":");
         printf("%d",getReceiver());
         msg.append(std::to_string(numberOfMessages).c_str());
-        tcpSocket->write(msg);
+        emit sendMessage(msg);
+        //tcpSocket->write(msg);
         readData();
 
 
 }
 void MainWindow::on_sendButton_clicked()
 {
+
     QByteArray msg =ui->textEdit->toMarkdown().toUtf8();
     QByteArray msg2=msg;
     msg2.prepend(":");
@@ -88,7 +106,8 @@ void MainWindow::on_sendButton_clicked()
     msg.prepend("Ty: ");
 
     msg = msg.left(msg.indexOf("\n"));
-    tcpSocket->write(msg2);
+    //tcpSocket->write(msg2);
+    emit sendMessage(msg2);
     ui->textBrowser->insertPlainText(msg);
     ui->textBrowser->insertPlainText("\n");
     ui->textBrowser->ensureCursorVisible();
@@ -99,3 +118,4 @@ void MainWindow::on_closeButton_clicked()
 {
     close();
 }
+

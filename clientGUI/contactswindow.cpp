@@ -21,14 +21,13 @@ void ContactsWindow::on_quitButton_clicked()
 
 void ContactsWindow::on_listWidget_itemClicked(QListWidgetItem *item)
 {
-    mainWindow = new MainWindow(this);
-    mainWindow->setWindowTitle(item->text());
-    disconnect(tcpSocket,&QIODevice::readyRead,0,0);
-    mainWindow->setSocket(tcpSocket);   
-    mainWindow->setReceiver(numbersGG[ui->listWidget->row(item)]);
-
-    mainWindow->ReadLastMessages(1);
-    mainWindow->show();
+    int index = ui->listWidget->row(item);
+    mainWindows.at(index)->setWindowTitle(names.at(index));
+    //disconnect(tcpSocket,&QIODevice::readyRead,0,0);
+    mainWindows.at(index)->setSocket(tcpSocket);
+    mainWindows.at(index)->setReceiver(numbersGG[index]);
+    mainWindows.at(index)->ReadLastMessages(1);
+    mainWindows.at(index)->show();
 }
 
 void ContactsWindow::setSocket(QTcpSocket *socket)
@@ -66,8 +65,30 @@ void ContactsWindow::readData(){
             QString status=QString::fromStdString(gg);
             QListWidgetItem *item = new QListWidgetItem(name+" - "+status);
             numbersGG.push_back(number);
+            names.push_back(name);
+            mainWindows.push_back(new MainWindow(this));
 
             ui->listWidget->addItem(item);
+        } else if (strncmp(buf, "RECV_MSG",8) == 0){
+            std::string s = buf;
+            s = s.substr(s.find("RECV_MSG")+9,s.length());
+            QString senderGG = QString::fromStdString(s.substr(0,s.find(":")));
+
+            int index = std::distance(numbersGG.begin() ,std::find(numbersGG.begin(), numbersGG.end(), senderGG.toInt()));
+            qDebug() << index;
+            qDebug() << numbersGG.at(index);
+            QString msg = QString::fromStdString(s.substr(s.find(":")+1,s.length()));
+            msg.prepend(": ");
+            msg.prepend(names.at(index));
+            mainWindows.at(index)->setText(msg.toUtf8());
+
+        } else if (strncmp(buf, "RECV_HIS",8) == 0){
+            std::string s = buf;
+            s = s.substr(s.find("RECV_HIS")+9,s.length());
+            QString receiverGG = QString::fromStdString(s.substr(0,s.find(":")));
+            int index = std::distance(numbersGG.begin() ,std::find(numbersGG.begin(), numbersGG.end(), receiverGG.toInt()));
+            mainWindows.at(index)->setText(QByteArray::fromStdString(s.substr(s.find(":")+1,s.length())));
+
         }
     }
 }
@@ -95,9 +116,17 @@ void ContactsWindow::loadContacts()
 
 }
 
+
 void ContactsWindow::on_pushButton_3_clicked()
 {
     numbersGG.clear();
     ui->listWidget->clear();
     loadContacts();
 }
+
+void ContactsWindow::sendMessageToServer(QByteArray buf)
+{
+    qDebug() << buf;
+    tcpSocket->write(buf);
+}
+

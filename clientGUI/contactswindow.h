@@ -26,20 +26,24 @@ private slots:
     void on_listWidget_itemClicked(QListWidgetItem *item);
     void on_addButton_clicked();
     void readData();
-
     void on_pushButton_3_clicked();
+
+public slots:
+    void sendMessageToServer(QByteArray buf);
 
 private:
     void loadContacts();
     Ui::ContactsWindow *ui;
     QTcpSocket *tcpSocket;
-    MainWindow *mainWindow;
+
     InfoDialog *infoDialog;
     AddContactWindow *addContactWindow;
     char buf[100];
     bool reading = false;
     std::vector<int> numbersGG;
     std::vector<QString> names;
+    std::vector<MainWindow *> mainWindows;
+
 };
 
 #endif // CONTACTSWINDOW_H

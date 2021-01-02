@@ -244,7 +244,14 @@ void *ThreadBehavior(void *t_data)
                 if(clients[i]){
                     
                     if(clients[i]->NRGG == ggrecipient){
-                        std::string result = name;
+                        std::string result = "RECV_MSG:";
+                        for(int i=0; i<QUEUE_SIZE; i++){
+                            if(clients[i]){
+                                if(clients[i]->sockfd == (*th_data).socket){
+                                    result = result.append(std::to_string(clients[i]->NRGG));
+                                }
+                            }
+                        }
                         result = result.append(":");
                         result.append(s.c_str());
                         char result_array[result.length()+1];
@@ -253,7 +260,7 @@ void *ThreadBehavior(void *t_data)
                         
                         
                         result_array[result.length()+1] = '\0';
-                        
+                        std::cout << result_array << std::endl;
                         send_message(result_array, ggrecipient);
                     }
                 }
@@ -309,7 +316,9 @@ void *ThreadBehavior(void *t_data)
             
                      while (getline(historyFile,line)){
                         memset(buff2,0,sizeof(buff2));
-                        s="";
+                        s="RECV_HIS:";
+                        s.append(std::to_string(ggreciever));
+                        s.append(":");
                         s.append(line);
                         strncpy(buff2,s.c_str(),sizeof(buff2));
                         printf("%s",s.c_str());
@@ -328,6 +337,7 @@ void *ThreadBehavior(void *t_data)
             }
         }
    }
+    close((*th_data).socket);
     free(t_data);
     pthread_exit(NULL);
 }

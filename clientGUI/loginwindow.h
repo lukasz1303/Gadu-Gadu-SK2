@@ -36,6 +36,7 @@ private:
     InfoDialog *infoDialog;
     char buf[100];
     bool reading = false;
+
 };
 
 #endif // LOGINWINDOW_H
