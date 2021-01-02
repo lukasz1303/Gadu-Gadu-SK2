@@ -29,7 +29,8 @@ typedef struct{
 int id=0;
  
 client_t *clients[QUEUE_SIZE];
-
+pthread_mutex_t SING_UP_MUTEX = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t CHAT_MESSAGES_MUTEX = PTHREAD_MUTEX_INITIALIZER;
 struct thread_data_t
 {
 int socket;
@@ -67,6 +68,8 @@ void *ThreadBehavior(void *t_data)
         printf("%s\n", buff);
         
         if(strncmp(buff,"SIGN_UP",7)==0){
+            pthread_mutex_lock(&SING_UP_MUTEX);
+
             std::ofstream usersFile;
             usersFile.open("users", std::ios_base::app);
             
@@ -83,6 +86,7 @@ void *ThreadBehavior(void *t_data)
             } else {
                 printf("Nie można otworzyć pliku \"users\"\n");
             }
+            pthread_mutex_unlock(&SING_UP_MUTEX);
         }
         
         if(strncmp(buff,"SIGN_IN",7)==0){
@@ -294,7 +298,7 @@ void *ThreadBehavior(void *t_data)
             }
                 std::string chathistoryFileName = "chathistory/" + filename;
                 std::fstream DoesExist;
-
+                pthread_mutex_lock(&CHAT_MESSAGES_MUTEX);
                 DoesExist.open(chathistoryFileName, std::fstream::in | std::fstream::out | std::fstream::app);
                 if(!DoesExist){
                     
@@ -310,6 +314,7 @@ void *ThreadBehavior(void *t_data)
                 Chathistory << std::to_string(ggsender)<<":"<<savetohistory << std::endl;
                
                 Chathistory.close();
+                pthread_mutex_unlock(&CHAT_MESSAGES_MUTEX);
             
         }
         if(strncmp(buff,"GET_HISTORY",11)==0){
@@ -329,6 +334,7 @@ void *ThreadBehavior(void *t_data)
                 
             std::ifstream historyFile;
             std::string chathistoryFileName = "chathistory/" + filename;
+            pthread_mutex_lock(&CHAT_MESSAGES_MUTEX);
             historyFile.open(chathistoryFileName);
             std::string line;  
             char buff2[100];
@@ -346,7 +352,9 @@ void *ThreadBehavior(void *t_data)
                         buff2[s.length()+1]='\0';
                         write((*th_data).socket, buff2, (s.length()+1)*sizeof(buff2[0]));
                 }
+                
             }
+            pthread_mutex_unlock(&CHAT_MESSAGES_MUTEX);
                 
         }
     }

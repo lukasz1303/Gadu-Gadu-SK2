@@ -27,7 +27,11 @@ void LoginWindow::displayError(QAbstractSocket::SocketError socketError){
         infoDialog->setLabelText("Serwer ulegl naglej awarii lub osiagnal limit uzytkownikow - sproboj pozniej");
         infoDialog->show();
     }
-
+    else if(socketError==QAbstractSocket::ConnectionRefusedError){
+        infoDialog = new InfoDialog(this);
+        infoDialog->setLabelText("Brak połączenia z serwerem");
+        infoDialog->show();
+    }
 
     qDebug() << socketError;
 }
@@ -85,11 +89,11 @@ void LoginWindow::on_signInButton_clicked()
             infoDialog = new InfoDialog(this);
             infoDialog->show();
         }
-    } else {
+    } /*else {
         infoDialog = new InfoDialog(this);
         infoDialog->setLabelText("Brak połączenia z serwerem");
         infoDialog->show();
-    }
+    }*/
 
 
 }
