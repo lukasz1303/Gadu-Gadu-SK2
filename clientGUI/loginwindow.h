@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QtDebug>
 #include <QtNetwork>
+#include <QDesktopWidget>
 #include <string>
 #include "contactswindow.h"
 #include "signupwindow.h"
@@ -39,7 +40,6 @@ private:
     SignUpWindow *signUpWindow;
     InfoDialog *infoDialog;
     char buf[100];
-    bool reading = false;
 
 };
 

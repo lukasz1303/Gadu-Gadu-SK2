@@ -27,6 +27,7 @@ void SignUpWindow::on_signUpButton_clicked()
     {
         if(tcpSocket->state() != QAbstractSocket::ConnectedState){
             tcpSocket->connectToHost("127.0.0.1", 1234);
+            tcpSocket->waitForConnected(500);
         }
         if(tcpSocket->state() == QAbstractSocket::ConnectedState){
             if (!reading){

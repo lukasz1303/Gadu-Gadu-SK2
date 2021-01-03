@@ -6,14 +6,12 @@ LoginWindow::LoginWindow(QWidget *parent) :
     ui(new Ui::LoginWIndow),
     tcpSocket(new QTcpSocket(this))
 {
+    ui->setupUi(this);
     connect(tcpSocket, &QIODevice::readyRead, this,&LoginWindow::readData);
     typedef void (QAbstractSocket::*QAbstractSocketErrorSignal)(QAbstractSocket::SocketError);
-    connect(tcpSocket, static_cast<QAbstractSocketErrorSignal>(&QAbstractSocket::error), this, &LoginWindow::displayError);
-    reading = true;
-    ui->setupUi(this);
-    tcpSocket->connectToHost("127.0.0.1", 1234);
+    connect(tcpSocket, static_cast<QAbstractSocketErrorSignal>(&QAbstractSocket::error), this, &LoginWindow::displayError);   
     ui->passwordLineEdit->setEchoMode(QLineEdit::Password);
-
+    tcpSocket->connectToHost("127.0.0.1", 1234);
 }
 
 LoginWindow::~LoginWindow()
@@ -24,12 +22,24 @@ LoginWindow::~LoginWindow()
 void LoginWindow::displayError(QAbstractSocket::SocketError socketError){
     if(socketError==QAbstractSocket::RemoteHostClosedError){
         infoDialog = new InfoDialog(this);
-        infoDialog->setLabelText("Serwer ulegl naglej awarii lub osiagnal limit uzytkownikow - sproboj pozniej");
+        infoDialog->setLabelText("Serwer uległ awarii lub osiagnął limit użytkownikow - spróbuj ponownie później");
+        infoDialog->setGeometry(
+                    QStyle::alignedRect(
+                        Qt::LeftToRight,
+                    Qt::AlignCenter,
+                        infoDialog->size(),
+                        qApp->desktop()->availableGeometry()));
         infoDialog->show();
     }
     else if(socketError==QAbstractSocket::ConnectionRefusedError){
         infoDialog = new InfoDialog(this);
         infoDialog->setLabelText("Brak połączenia z serwerem");
+        infoDialog->setGeometry(
+                    QStyle::alignedRect(
+                        Qt::LeftToRight,
+                    Qt::AlignCenter,
+                        infoDialog->size(),
+                        qApp->desktop()->availableGeometry()));
         infoDialog->show();
     }
 
@@ -96,7 +106,6 @@ void LoginWindow::on_signUpButton_clicked()
 {
     signUpWindow = new SignUpWindow(this);
     disconnect(tcpSocket,&QIODevice::readyRead,0,0);
-    reading = false;
     signUpWindow->setSocket(tcpSocket);
     signUpWindow->show();
     hide();
