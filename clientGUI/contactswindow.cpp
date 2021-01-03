@@ -43,10 +43,11 @@ void ContactsWindow::setSocket(QTcpSocket *socket)
 
 void ContactsWindow::on_addButton_clicked()
 {
-    addContactWindow = new AddContactWindow(this);
-    disconnect(tcpSocket,&QIODevice::readyRead,0,0);
-    addContactWindow->setSocket(tcpSocket);
-    addContactWindow->show();
+
+    if (addContactWindow == NULL || addContactWindow->isHidden()){
+        addContactWindow = new AddContactWindow(this);
+        addContactWindow->show();
+    }
 }
 
 
@@ -98,17 +99,29 @@ void ContactsWindow::readData(){
             qDebug()<<nr1;
             if(nr1==mainWindows.at(index)->getReceiver()){
                 s=(names[index]).toStdString()+s;
-
-
             }
             else{
                 s=mainWindows.at(index)->myname.toStdString()+s;
-
-
             }
-
             mainWindows.at(index)->setText(QByteArray::fromStdString(s));
+        } else if (strncmp(buf, "ADD_CONT:OK",11) == 0){
+            infoDialog = new InfoDialog(this);
+            infoDialog->setLabelText("Dodano znajomego");
+            infoDialog->show();
+            numbersGG.clear();
+            ui->listWidget->clear();
+            loadContacts();
+            addContactWindow->hide();
 
+        } else if(strncmp(buf, "ADD_CONT:EXISTS",15) == 0){
+            infoDialog = new InfoDialog(addContactWindow);
+            infoDialog->setLabelText("Już istnieje znajomy o takiej nazwie lub numerze GG");
+            infoDialog->show();
+
+        } else if(strncmp(buf, "ADD_CONT:NO_SIGNED",18) == 0){
+            infoDialog = new InfoDialog(addContactWindow);
+            infoDialog->setLabelText("Nie istnieje osoba o takim numerze GG");
+            infoDialog->show();
         }
     }
 }

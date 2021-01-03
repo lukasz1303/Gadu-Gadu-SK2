@@ -37,7 +37,7 @@ private:
     QTcpSocket *tcpSocket;
 
     InfoDialog *infoDialog;
-    AddContactWindow *addContactWindow;
+    AddContactWindow *addContactWindow = NULL;
     char buf[100];
     std::vector<int> numbersGG;
     std::vector<QString> names;

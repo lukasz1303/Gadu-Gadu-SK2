@@ -18,13 +18,9 @@ class AddContactWindow : public QMainWindow
 public:
     explicit AddContactWindow(QWidget *parent = nullptr);
     ~AddContactWindow();
-    void setSocket(QTcpSocket *socket);
 
 private slots:
-    void readData();
-
     void on_addButton_clicked();
-
     void on_cancelButton_clicked();
 
 signals:
@@ -32,10 +28,8 @@ signals:
 
 private:
     Ui::AddContactWindow *ui;
-    QTcpSocket *tcpSocket;
     InfoDialog *infoDialog;
     char buf[100];
-    bool reading = false;
 };
 
 #endif // ADDCONTACTWINDOW_H

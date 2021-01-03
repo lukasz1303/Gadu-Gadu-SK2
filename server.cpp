@@ -155,6 +155,7 @@ void *ThreadBehavior(void *t_data)
         
         if(strncmp(buff,"ADD_CONT",8)==0){
 
+            
             std::string s = buff;
             s = s.substr(s.find(":")+1,s.length());
             std::string filename = s.substr(0,s.find(":"));
@@ -169,8 +170,8 @@ void *ThreadBehavior(void *t_data)
                  while (getline(contactsFile,line)){
                     if (contact.substr(0,contact.find(":")).compare(line.substr(0,line.find(":")))== 0 ||
                         contact.substr(contact.find(":")+1, contact.length()).compare(line.substr(line.find(":")+1, line.length()))== 0){
-                        char buff2[20] = "ADD_CONT:EXISTS";
-                        write((*th_data).socket, buff2, sizeof(buff2));
+                        char buff2[20] = "ADD_CONT:EXISTS\n";
+                        write((*th_data).socket, buff2, strlen(buff2));
                         finded = true;
                         break;
                     }
@@ -195,11 +196,12 @@ void *ThreadBehavior(void *t_data)
                         contactsFile.clear();
                         contactsFile.seekp(0, std::ios_base::end);
                         contactsFile << contact << std::endl;
-                        char buff2[20] = "ADD_CONT:OK";
-                        write((*th_data).socket, buff2, sizeof(buff2));
+                        char buff2[20] = "ADD_CONT:OK\n";
+                        write((*th_data).socket, buff2, strlen(buff2));
                     } else {
-                        char buff2[20] = "ADD_CONT:NO_SIGNED";
-                        write((*th_data).socket, buff2, sizeof(buff2));
+                        char buff2[21] = "ADD_CONT:NO_SIGNED\n";
+                        write((*th_data).socket, buff2, strlen(buff2));
+                        std::cout<< buff2 << std::endl;
                     }
                     
                 }
@@ -424,6 +426,14 @@ int main(int argc, char* argv[])
        fprintf(stderr, "%s: Błąd przy próbie ustawienia wielkości kolejki.\n", argv[0]);
        exit(1);
    }
+   
+    struct sigaction act;   
+    memset(&act, '\0', sizeof(act));   
+    act.sa_handler = SIG_IGN;   
+    if (sigaction(SIGPIPE, &act, NULL)) {
+       perror("sigaction");
+       exit(1);   
+    }
 
     while(1)
     {
