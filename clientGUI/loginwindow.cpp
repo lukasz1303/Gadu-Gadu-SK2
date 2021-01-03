@@ -90,7 +90,6 @@ void LoginWindow::on_signInButton_clicked()
             msg.append(login);
             msg.append(":");
             msg.append(password);
-            qDebug() << "niby połączono";
             tcpSocket->write(msg.toLatin1());
         }
         else

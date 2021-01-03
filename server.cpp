@@ -26,7 +26,6 @@ typedef struct{
     
 } client_t;
 
-int id=0;
  
 client_t *clients[QUEUE_SIZE];
 pthread_mutex_t SING_UP_MUTEX = PTHREAD_MUTEX_INITIALIZER;
@@ -110,7 +109,7 @@ void *ThreadBehavior(void *t_data)
                             if(clients[i]){
                                 if(clients[i]->NRGG==std::stoi(line.substr(line.rfind(":")+1,line.length()))){
                                    strncpy(buff2,"SIGN_IN:LOGGED",sizeof(buff2));
-                                   write((*th_data).socket, buff2, sizeof(buff2));
+                                   write((*th_data).socket, buff2, strlen(buff2));
                                    finded=false;
                                    already_logged=true;
                                    break;
@@ -138,14 +137,14 @@ void *ThreadBehavior(void *t_data)
                 if(finded){
                     strncpy(buff2,ret.c_str(),sizeof(buff2));
                     buff2[ret.length()]=0;
-                    write((*th_data).socket, buff2, sizeof(buff2));
+                    write((*th_data).socket, buff2, strlen(buff2));
                 } 
                 else if(already_logged){
                     
                 }
                 else {
                     strncpy(buff2,"SIGN_IN:ERROR",sizeof(buff2));
-                    write((*th_data).socket, buff2, sizeof(buff2));
+                    write((*th_data).socket, buff2, strlen(buff2));
                 }
                 
             } else {
@@ -170,7 +169,7 @@ void *ThreadBehavior(void *t_data)
                  while (getline(contactsFile,line)){
                     if (contact.substr(0,contact.find(":")).compare(line.substr(0,line.find(":")))== 0 ||
                         contact.substr(contact.find(":")+1, contact.length()).compare(line.substr(line.find(":")+1, line.length()))== 0){
-                        char buff2[20] = "ADD_CONT:EXISTS\n";
+                        char buff2[17] = "ADD_CONT:EXISTS\n";
                         write((*th_data).socket, buff2, strlen(buff2));
                         finded = true;
                         break;
@@ -196,10 +195,10 @@ void *ThreadBehavior(void *t_data)
                         contactsFile.clear();
                         contactsFile.seekp(0, std::ios_base::end);
                         contactsFile << contact << std::endl;
-                        char buff2[20] = "ADD_CONT:OK\n";
+                        char buff2[13] = "ADD_CONT:OK\n";
                         write((*th_data).socket, buff2, strlen(buff2));
                     } else {
-                        char buff2[21] = "ADD_CONT:NO_SIGNED\n";
+                        char buff2[20] = "ADD_CONT:NO_SIGNED\n";
                         write((*th_data).socket, buff2, strlen(buff2));
                         std::cout<< buff2 << std::endl;
                     }
@@ -241,7 +240,7 @@ void *ThreadBehavior(void *t_data)
                     strncpy(buff2,s.c_str(),sizeof(buff2));
                     buff2[s.length()]='\n';
                     buff2[s.length()+1]='\0';
-                    write((*th_data).socket, buff2, (s.length()+1)*sizeof(buff2[0]));
+                    write((*th_data).socket, buff2, strlen(buff2));
                     }
                     
             } else {
@@ -352,7 +351,7 @@ void *ThreadBehavior(void *t_data)
                         printf("%s",s.c_str());
                         buff2[s.length()]='\n';
                         buff2[s.length()+1]='\0';
-                        write((*th_data).socket, buff2, (s.length()+1)*sizeof(buff2[0]));
+                        write((*th_data).socket, buff2, strlen(buff2));
                 }
                 
             }
@@ -455,7 +454,6 @@ int main(int argc, char* argv[])
        
         client_t *client = (client_t *)malloc(sizeof(client_t));
         client->sockfd = connection_socket_descriptor;
-        //client->id = id++;
        
         for(int i=0; i < QUEUE_SIZE; i++){
             if(clients[i]==NULL){
