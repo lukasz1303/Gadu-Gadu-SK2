@@ -49,7 +49,7 @@ void LoginWindow::readData(){
         disconnect(tcpSocket,&QIODevice::readyRead,0,0);
         contactsWindows = new ContactsWindow(this);
         contactsWindows->setSocket(tcpSocket);
-        contactsWindows->myname=login;
+        contactsWindows->setMyName(login);
         contactsWindows->show();
     } else if(strcmp(buf, "SIGN_IN:ERROR") == 0){
         infoDialog = new InfoDialog(this);
@@ -58,7 +58,7 @@ void LoginWindow::readData(){
     }
     else if(strcmp(buf,"SIGN_IN:LOGGED")==0){
         infoDialog = new InfoDialog(this);
-        infoDialog->setLabelText("To konto jest w tej chwili w uzytku - wyloguj sie z pozostalych urzadzen by z niego korzystac!");
+        infoDialog->setLabelText("To konto jest w tej chwili w użytku - wyloguj sie z pozostalych urządzeń by z niego korzystać!");
         infoDialog->show();
     }
 }
@@ -67,11 +67,9 @@ void LoginWindow::on_signInButton_clicked()
 {
     if(tcpSocket->state() != QAbstractSocket::ConnectedState){
         tcpSocket->connectToHost("127.0.0.1", 1234);
+        tcpSocket->waitForConnected(500);
     }
     if(tcpSocket->state() == QAbstractSocket::ConnectedState){
-        if (!reading){
-            connect(tcpSocket, &QIODevice::readyRead, this,&LoginWindow::readData);
-        }
         QString msg = "SIGN_IN:";
         QRegExp re("[^A-Za-z0-9]");
         this->login = ui->loginTextEdit->toPlainText();
@@ -82,6 +80,7 @@ void LoginWindow::on_signInButton_clicked()
             msg.append(login);
             msg.append(":");
             msg.append(password);
+            qDebug() << "niby połączono";
             tcpSocket->write(msg.toLatin1());
         }
         else
@@ -89,12 +88,7 @@ void LoginWindow::on_signInButton_clicked()
             infoDialog = new InfoDialog(this);
             infoDialog->show();
         }
-    } /*else {
-        infoDialog = new InfoDialog(this);
-        infoDialog->setLabelText("Brak połączenia z serwerem");
-        infoDialog->show();
-    }*/
-
+    }
 
 }
 
@@ -111,5 +105,6 @@ void LoginWindow::on_signUpButton_clicked()
 void LoginWindow::showWindow()
 {
     show();
+    connect(tcpSocket, &QIODevice::readyRead, this,&LoginWindow::readData);
 }
 

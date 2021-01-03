@@ -6,7 +6,7 @@ ContactsWindow::ContactsWindow(QWidget *parent) :
     ui(new Ui::ContactsWindow)
 {
     ui->setupUi(this);
-
+    ui->listWidget->setSpacing(3);
 }
 
 ContactsWindow::~ContactsWindow()
@@ -23,13 +23,10 @@ void ContactsWindow::on_listWidget_itemClicked(QListWidgetItem *item)
 {
     int index = ui->listWidget->row(item);
     mainWindows.at(index)->setWindowTitle(names.at(index));
-    //disconnect(tcpSocket,&QIODevice::readyRead,0,0);
     mainWindows.at(index)->clear();
-    mainWindows.at(index)->setSocket(tcpSocket);
-
     mainWindows.at(index)->setReceiver(numbersGG[index]);
-    mainWindows.at(index)->reveivername=names[index];
-    mainWindows.at(index)->myname=this->myname;
+    mainWindows.at(index)->setReveivername(names[index]);
+    mainWindows.at(index)->setMyname(this->myName);
     mainWindows.at(index)->ReadLastMessages(1);
     mainWindows.at(index)->show();
 }
@@ -50,7 +47,6 @@ void ContactsWindow::on_addButton_clicked()
     }
 }
 
-
 void ContactsWindow::readData(){
 
     while(tcpSocket->canReadLine()){
@@ -66,9 +62,17 @@ void ContactsWindow::readData(){
             std::string gg = s.substr(s.find(":")+1,s.length());
 
             int number  = std::stoi(gg.substr(0,gg.find(":")));
-            gg=gg.substr(gg.find(":")+1,gg.length());
-            QString status=QString::fromStdString(gg);
-            QListWidgetItem *item = new QListWidgetItem(name+" - "+status);
+            std::string statusStr = gg.substr(gg.find(":")+1,gg.length());
+            statusStr = statusStr.substr(0,statusStr.find("\n"));
+            QIcon statusIcon;
+            if (statusStr.compare("online")==0){
+                 statusIcon = QIcon(":/images/online.png");
+            } else {
+                 statusIcon = QIcon(":/images/offline.png");
+            }
+
+            QListWidgetItem *item = new QListWidgetItem(name);
+            item->setIcon(statusIcon);
             numbersGG.push_back(number);
             names.push_back(name);
             mainWindows.push_back(new MainWindow(this));
@@ -101,7 +105,7 @@ void ContactsWindow::readData(){
                 s=(names[index]).toStdString()+s;
             }
             else{
-                s=mainWindows.at(index)->myname.toStdString()+s;
+                s=mainWindows.at(index)->getMyname().toStdString()+s;
             }
             mainWindows.at(index)->setText(QByteArray::fromStdString(s));
         } else if (strncmp(buf, "ADD_CONT:OK",11) == 0){
@@ -130,7 +134,7 @@ void ContactsWindow::loadContacts()
 {
     if(tcpSocket->state() != QAbstractSocket::ConnectedState){
         tcpSocket->connectToHost("127.0.0.1", 1234);
-        connect(tcpSocket, &QIODevice::readyRead, this,&ContactsWindow::readData);
+        tcpSocket->waitForReadyRead(500);
     }
     if(tcpSocket->state() == QAbstractSocket::ConnectedState){
         QString msg = "GET_CONT:";
@@ -143,15 +147,16 @@ void ContactsWindow::loadContacts()
         infoDialog->setLabelText("Brak połączenia z serwerem");
         infoDialog->show();
     }
-
 }
 
-
-void ContactsWindow::on_pushButton_3_clicked()
+QString ContactsWindow::getMyName() const
 {
-    numbersGG.clear();
-    ui->listWidget->clear();
-    loadContacts();
+    return myName;
+}
+
+void ContactsWindow::setMyName(const QString &value)
+{
+    myName = value;
 }
 
 void ContactsWindow::sendMessageToServer(QByteArray buf)
@@ -172,3 +177,9 @@ void ContactsWindow::sendMessageToServer(QByteArray buf)
     }
 }
 
+void ContactsWindow::on_refreshButton_clicked()
+{
+    numbersGG.clear();
+    ui->listWidget->clear();
+    loadContacts();
+}

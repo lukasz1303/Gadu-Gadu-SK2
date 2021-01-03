@@ -2,12 +2,15 @@
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>365</width>
-    <height>336</height>
+    <height>375</height>
    </rect>
   </property>
   <property name="palette">
@@ -81,10 +84,10 @@
    <widget class="QTextBrowser" name="textBrowser">
     <property name="geometry">
      <rect>
-      <x>33</x>
-      <y>20</y>
-      <width>291</width>
-      <height>151</height>
+      <x>30</x>
+      <y>10</y>
+      <width>301</width>
+      <height>201</height>
      </rect>
     </property>
     <property name="palette">
@@ -129,7 +132,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>230</y>
+      <y>270</y>
       <width>251</width>
       <height>51</height>
      </rect>
@@ -144,9 +147,9 @@
    <widget class="QTextEdit" name="textEdit">
     <property name="geometry">
      <rect>
-      <x>33</x>
-      <y>179</y>
-      <width>291</width>
+      <x>30</x>
+      <y>220</y>
+      <width>301</width>
       <height>41</height>
      </rect>
     </property>
@@ -192,7 +195,7 @@
     <property name="geometry">
      <rect>
       <x>270</x>
-      <y>240</y>
+      <y>290</y>
       <width>81</width>
       <height>31</height>
      </rect>
@@ -208,7 +211,7 @@
      <x>0</x>
      <y>0</y>
      <width>365</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

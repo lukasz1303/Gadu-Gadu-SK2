@@ -20,13 +20,15 @@ public:
     explicit ContactsWindow(QWidget *parent = nullptr);
     ~ContactsWindow();
     void setSocket(QTcpSocket *socket);
-    QString myname;
+    QString getMyName() const;
+    void setMyName(const QString &value);
+
 private slots:
     void on_quitButton_clicked();
     void on_listWidget_itemClicked(QListWidgetItem *item);
     void on_addButton_clicked();
     void readData();
-    void on_pushButton_3_clicked();
+    void on_refreshButton_clicked();
 
 public slots:
     void sendMessageToServer(QByteArray buf);
@@ -35,13 +37,13 @@ private:
     void loadContacts();
     Ui::ContactsWindow *ui;
     QTcpSocket *tcpSocket;
-
     InfoDialog *infoDialog;
     AddContactWindow *addContactWindow = NULL;
     char buf[100];
     std::vector<int> numbersGG;
     std::vector<QString> names;
     std::vector<MainWindow *> mainWindows;
+    QString myName;
 
 };
 

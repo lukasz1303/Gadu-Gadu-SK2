@@ -16,32 +16,32 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    void setSocket(QTcpSocket *socket);
     int getReceiver();
     void setReceiver(int ggnumber);
     void setText(QByteArray buf);
     bool eventFilter(QObject *object, QEvent *event);
     void ReadLastMessages(int numberOfMessages);
-    QString myname;
-    QString reveivername;
-    bool readhistory=false;
     void clear();
+    QString getMyname() const;
+    void setMyname(const QString &value);
+    QString getReveivername() const;
+    void setReveivername(const QString &value);
+
+
 signals:
     void sendMessage(QByteArray buf);
 
 private slots:
-
-    void displayError(QAbstractSocket::SocketError socketError);
     void on_sendButton_clicked();
-    void readData();
     void on_closeButton_clicked();
 
 private:
     Ui::MainWindow *ui;
     QTcpSocket *tcpSocket;
     int receiver;
-
-
+    bool readhistory=false;
+    QString myname;
+    QString reveivername;
 
 };
 #endif // MAINWINDOW_H

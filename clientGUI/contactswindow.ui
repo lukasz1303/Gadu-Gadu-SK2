@@ -289,7 +289,7 @@
      <string>Dodaj</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QPushButton" name="refreshButton">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -299,7 +299,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Refresh</string>
+     <string>Odśwież</string>
     </property>
    </widget>
    <widget class="QLabel" name="label">
