@@ -11,6 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
@@ -29,6 +30,7 @@ public:
     QPushButton *sendButton;
     QTextEdit *textEdit;
     QPushButton *closeButton;
+    QLabel *textCounter;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -36,7 +38,8 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(365, 336);
+        MainWindow->setEnabled(true);
+        MainWindow->resize(365, 375);
         QPalette palette;
         QBrush brush(QColor(255, 255, 255, 255));
         brush.setStyle(Qt::SolidPattern);
@@ -53,7 +56,7 @@ public:
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         textBrowser = new QTextBrowser(centralwidget);
         textBrowser->setObjectName(QString::fromUtf8("textBrowser"));
-        textBrowser->setGeometry(QRect(33, 20, 291, 151));
+        textBrowser->setGeometry(QRect(30, 10, 301, 201));
         QPalette palette1;
         QBrush brush2(QColor(255, 243, 138, 255));
         brush2.setStyle(Qt::SolidPattern);
@@ -65,10 +68,10 @@ public:
         textBrowser->setPalette(palette1);
         sendButton = new QPushButton(centralwidget);
         sendButton->setObjectName(QString::fromUtf8("sendButton"));
-        sendButton->setGeometry(QRect(10, 230, 251, 51));
+        sendButton->setGeometry(QRect(10, 270, 251, 51));
         textEdit = new QTextEdit(centralwidget);
         textEdit->setObjectName(QString::fromUtf8("textEdit"));
-        textEdit->setGeometry(QRect(33, 179, 291, 41));
+        textEdit->setGeometry(QRect(30, 220, 301, 41));
         QPalette palette2;
         palette2.setBrush(QPalette::Active, QPalette::Base, brush2);
         palette2.setBrush(QPalette::Inactive, QPalette::Base, brush2);
@@ -76,7 +79,10 @@ public:
         textEdit->setPalette(palette2);
         closeButton = new QPushButton(centralwidget);
         closeButton->setObjectName(QString::fromUtf8("closeButton"));
-        closeButton->setGeometry(QRect(270, 240, 81, 31));
+        closeButton->setGeometry(QRect(270, 290, 81, 31));
+        textCounter = new QLabel(centralwidget);
+        textCounter->setObjectName(QString::fromUtf8("textCounter"));
+        textCounter->setGeometry(QRect(280, 260, 67, 17));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
@@ -99,6 +105,7 @@ public:
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
         sendButton->setText(QCoreApplication::translate("MainWindow", "Wy\305\233lij", nullptr));
         closeButton->setText(QCoreApplication::translate("MainWindow", "Wyjd\305\272", nullptr));
+        textCounter->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
     } // retranslateUi
 
 };

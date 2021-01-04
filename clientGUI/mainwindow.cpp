@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     ui->textEdit->setPlaceholderText("Wprowadź wiadomość");
+    ui->textCounter->setText("0/250");
     ui->textEdit->installEventFilter(this);
     connect(ui->textEdit,  SIGNAL(textChanged ()),   this,  SLOT(contents_changed()));
     connect(this, SIGNAL(sendMessage(QByteArray)), parent, SLOT(sendMessageToServer(QByteArray)));
@@ -21,8 +22,11 @@ MainWindow::~MainWindow()
 }
 void MainWindow::contents_changed(){
     QString textContent = ui->textEdit->toPlainText();
-    int length = textContent.length();
+
+
+    int length = textContent.count();
     int maxLength = 250;
+    ui->textCounter->clear();
     if(length > maxLength) {
         int position = ui->textEdit->textCursor().position();
         QTextCursor textCursor = ui->textEdit->textCursor();
@@ -31,7 +35,11 @@ void MainWindow::contents_changed(){
         ui->textEdit->setText(textContent);
         textCursor.setPosition(position-(length-maxLength));
         ui->textEdit->setTextCursor(textCursor);
+
+        ui->textCounter->setText(QString::fromStdString(std::to_string(maxLength)+"/"+std::to_string(maxLength)));
     }
+    else{
+    ui->textCounter->setText(QString::fromStdString(std::to_string(length)+"/"+std::to_string(maxLength)));}
 }
 bool MainWindow::eventFilter(QObject *object, QEvent *event)
 {

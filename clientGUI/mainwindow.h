@@ -5,6 +5,7 @@
 #include <QtDebug>
 #include <QtNetwork>
 #include<QKeyEvent>
+#include<QLabel>
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -34,6 +35,7 @@ private slots:
     void on_sendButton_clicked();
     void on_closeButton_clicked();
     void contents_changed();
+
 
 private:
     Ui::MainWindow *ui;

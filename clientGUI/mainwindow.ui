@@ -204,6 +204,19 @@
      <string>Wyjdź</string>
     </property>
    </widget>
+   <widget class="QLabel" name="textCounter">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>260</y>
+      <width>67</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -211,7 +224,7 @@
      <x>0</x>
      <y>0</y>
      <width>365</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>
