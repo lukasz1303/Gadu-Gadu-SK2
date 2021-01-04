@@ -1,6 +1,8 @@
 ﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QMdiSubWindow>
+#include <QtCore>
+#include <QtGui>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
@@ -9,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ui->textEdit->setPlaceholderText("Wprowadź wiadomość");
     ui->textEdit->installEventFilter(this);
+    connect(ui->textEdit,  SIGNAL(textChanged ()),   this,  SLOT(contents_changed()));
     connect(this, SIGNAL(sendMessage(QByteArray)), parent, SLOT(sendMessageToServer(QByteArray)));
 }
 
@@ -16,9 +19,23 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+void MainWindow::contents_changed(){
+    QString textContent = ui->textEdit->toPlainText();
+    int length = textContent.length();
+    int maxLength = 250;
+    if(length > maxLength) {
+        int position = ui->textEdit->textCursor().position();
+        QTextCursor textCursor = ui->textEdit->textCursor();
 
+        textContent.remove(position-(length-maxLength), length-maxLength);
+        ui->textEdit->setText(textContent);
+        textCursor.setPosition(position-(length-maxLength));
+        ui->textEdit->setTextCursor(textCursor);
+    }
+}
 bool MainWindow::eventFilter(QObject *object, QEvent *event)
 {
+
     if (object == ui->textEdit && event->type() == QEvent::KeyPress)
     {
         QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
@@ -71,7 +88,9 @@ void MainWindow::ReadLastMessages(int numberOfMessages)
         emit sendMessage(msg);
         this->readhistory=false;
 }
+void MainWindow::messageLength(QByteArray message){
 
+}
 void MainWindow::on_sendButton_clicked()
 {
     QByteArray msg =ui->textEdit->toMarkdown().toUtf8();

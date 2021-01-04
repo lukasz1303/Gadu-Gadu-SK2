@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_ContactsWindow_t {
     QByteArrayData data[11];
-    char stringdata0[164];
+    char stringdata0[165];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -40,15 +40,15 @@ QT_MOC_LITERAL(4, 64, 16), // "QListWidgetItem*"
 QT_MOC_LITERAL(5, 81, 4), // "item"
 QT_MOC_LITERAL(6, 86, 20), // "on_addButton_clicked"
 QT_MOC_LITERAL(7, 107, 8), // "readData"
-QT_MOC_LITERAL(8, 116, 23), // "on_pushButton_3_clicked"
-QT_MOC_LITERAL(9, 140, 19), // "sendMessageToServer"
-QT_MOC_LITERAL(10, 160, 3) // "buf"
+QT_MOC_LITERAL(8, 116, 24), // "on_refreshButton_clicked"
+QT_MOC_LITERAL(9, 141, 19), // "sendMessageToServer"
+QT_MOC_LITERAL(10, 161, 3) // "buf"
 
     },
     "ContactsWindow\0on_quitButton_clicked\0"
     "\0on_listWidget_itemClicked\0QListWidgetItem*\0"
     "item\0on_addButton_clicked\0readData\0"
-    "on_pushButton_3_clicked\0sendMessageToServer\0"
+    "on_refreshButton_clicked\0sendMessageToServer\0"
     "buf"
 };
 #undef QT_MOC_LITERAL
@@ -95,7 +95,7 @@ void ContactsWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
         case 1: _t->on_listWidget_itemClicked((*reinterpret_cast< QListWidgetItem*(*)>(_a[1]))); break;
         case 2: _t->on_addButton_clicked(); break;
         case 3: _t->readData(); break;
-        case 4: _t->on_pushButton_3_clicked(); break;
+        case 4: _t->on_refreshButton_clicked(); break;
         case 5: _t->sendMessageToServer((*reinterpret_cast< QByteArray(*)>(_a[1]))); break;
         default: ;
         }

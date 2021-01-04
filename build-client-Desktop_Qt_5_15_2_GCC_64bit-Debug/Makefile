@@ -81,7 +81,8 @@ OBJECTS       = addcontactwindow.o \
 		moc_loginwindow.o \
 		moc_mainwindow.o \
 		moc_signupwindow.o
-DIST          = ../../../../Qt/5.15.2/gcc_64/mkspecs/features/spec_pre.prf \
+DIST          = ../clientGUI/images/green-circle-md.png \
+		../../../../Qt/5.15.2/gcc_64/mkspecs/features/spec_pre.prf \
 		../../../../Qt/5.15.2/gcc_64/mkspecs/common/unix.conf \
 		../../../../Qt/5.15.2/gcc_64/mkspecs/common/linux.conf \
 		../../../../Qt/5.15.2/gcc_64/mkspecs/common/sanitize.conf \
@@ -689,6 +690,8 @@ compiler_rcc_clean:
 	-$(DEL_FILE) qrc_images.cpp
 qrc_images.cpp: ../clientGUI/images/images.qrc \
 		../../../../Qt/5.15.2/gcc_64/bin/rcc \
+		../clientGUI/images/offline.png \
+		../clientGUI/images/online.png \
 		../clientGUI/images/external-content.duckduckgo.com.png
 	/home/jan/Qt/5.15.2/gcc_64/bin/rcc -name images ../clientGUI/images/images.qrc -o qrc_images.cpp
 
@@ -1738,6 +1741,8 @@ moc_loginwindow.cpp: ../clientGUI/loginwindow.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtNetwork/qsslkey.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtNetwork/qudpsocket.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtNetwork/qtnetworkversion.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QDesktopWidget \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qdesktopwidget.h \
 		../clientGUI/contactswindow.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QListWidgetItem \
 		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qlistwidget.h \
@@ -3507,6 +3512,8 @@ loginwindow.o: ../clientGUI/loginwindow.cpp ../clientGUI/loginwindow.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtNetwork/qsslkey.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtNetwork/qudpsocket.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtNetwork/qtnetworkversion.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QDesktopWidget \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qdesktopwidget.h \
 		../clientGUI/contactswindow.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QListWidgetItem \
 		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qlistwidget.h \
@@ -3534,7 +3541,6 @@ loginwindow.o: ../clientGUI/loginwindow.cpp ../clientGUI/loginwindow.h \
 		ui_loginwindow.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QApplication \
 		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qapplication.h \
-		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qdesktopwidget.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtGui/qguiapplication.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtGui/qinputmethod.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QLabel \
@@ -3859,6 +3865,8 @@ main.o: ../clientGUI/main.cpp ../clientGUI/mainwindow.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtNetwork/qtnetworkversion.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtGui/QKeyEvent \
 		../clientGUI/loginwindow.h \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QDesktopWidget \
+		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qdesktopwidget.h \
 		../clientGUI/contactswindow.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QListWidgetItem \
 		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qlistwidget.h \
@@ -3883,7 +3891,6 @@ main.o: ../clientGUI/main.cpp ../clientGUI/mainwindow.h \
 		../clientGUI/signupwindow.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/QApplication \
 		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qapplication.h \
-		../../../../Qt/5.15.2/gcc_64/include/QtWidgets/qdesktopwidget.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtGui/qguiapplication.h \
 		../../../../Qt/5.15.2/gcc_64/include/QtGui/qinputmethod.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../clientGUI/main.cpp

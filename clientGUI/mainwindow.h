@@ -25,15 +25,15 @@ public:
     QString getMyname() const;
     void setMyname(const QString &value);
     QString getReveivername() const;
-    void setReveivername(const QString &value);
-
-
+    void setReveivername(const QString &value);   
+    void messageLength(QByteArray message);
 signals:
     void sendMessage(QByteArray buf);
 
 private slots:
     void on_sendButton_clicked();
     void on_closeButton_clicked();
+    void contents_changed();
 
 private:
     Ui::MainWindow *ui;

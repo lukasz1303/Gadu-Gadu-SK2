@@ -17,7 +17,7 @@ public:
     explicit SignUpWindow(QWidget *parent = nullptr);
     ~SignUpWindow();
     void setSocket(QTcpSocket *socket);
-
+    bool CheckCredentials();
 private slots:
     void on_signUpButton_clicked();
     void readData();
@@ -31,6 +31,7 @@ private:
     InfoDialog *infoDialog;
     char buf[100];
     bool reading = false;
+
 };
 
 #endif // SIGNUPWINDOW_H

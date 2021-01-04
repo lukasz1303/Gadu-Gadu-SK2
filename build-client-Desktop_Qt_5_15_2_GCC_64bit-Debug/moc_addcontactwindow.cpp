@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_AddContactWindow_t {
-    QByteArrayData data[5];
-    char stringdata0[72];
+    QByteArrayData data[6];
+    char stringdata0[79];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -33,13 +33,14 @@ struct qt_meta_stringdata_AddContactWindow_t {
 static const qt_meta_stringdata_AddContactWindow_t qt_meta_stringdata_AddContactWindow = {
     {
 QT_MOC_LITERAL(0, 0, 16), // "AddContactWindow"
-QT_MOC_LITERAL(1, 17, 8), // "readData"
-QT_MOC_LITERAL(2, 26, 0), // ""
-QT_MOC_LITERAL(3, 27, 20), // "on_addButton_clicked"
-QT_MOC_LITERAL(4, 48, 23) // "on_cancelButton_clicked"
+QT_MOC_LITERAL(1, 17, 11), // "sendMessage"
+QT_MOC_LITERAL(2, 29, 0), // ""
+QT_MOC_LITERAL(3, 30, 3), // "buf"
+QT_MOC_LITERAL(4, 34, 20), // "on_addButton_clicked"
+QT_MOC_LITERAL(5, 55, 23) // "on_cancelButton_clicked"
 
     },
-    "AddContactWindow\0readData\0\0"
+    "AddContactWindow\0sendMessage\0\0buf\0"
     "on_addButton_clicked\0on_cancelButton_clicked"
 };
 #undef QT_MOC_LITERAL
@@ -55,15 +56,19 @@ static const uint qt_meta_data_AddContactWindow[] = {
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       0,       // signalCount
+       1,       // signalCount
+
+ // signals: name, argc, parameters, tag, flags
+       1,    1,   29,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   29,    2, 0x08 /* Private */,
-       3,    0,   30,    2, 0x08 /* Private */,
-       4,    0,   31,    2, 0x08 /* Private */,
+       4,    0,   32,    2, 0x08 /* Private */,
+       5,    0,   33,    2, 0x08 /* Private */,
+
+ // signals: parameters
+    QMetaType::Void, QMetaType::QByteArray,    3,
 
  // slots: parameters
-    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
 
@@ -76,13 +81,21 @@ void AddContactWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
         auto *_t = static_cast<AddContactWindow *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->readData(); break;
+        case 0: _t->sendMessage((*reinterpret_cast< QByteArray(*)>(_a[1]))); break;
         case 1: _t->on_addButton_clicked(); break;
         case 2: _t->on_cancelButton_clicked(); break;
         default: ;
         }
+    } else if (_c == QMetaObject::IndexOfMethod) {
+        int *result = reinterpret_cast<int *>(_a[0]);
+        {
+            using _t = void (AddContactWindow::*)(QByteArray );
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&AddContactWindow::sendMessage)) {
+                *result = 0;
+                return;
+            }
+        }
     }
-    Q_UNUSED(_a);
 }
 
 QT_INIT_METAOBJECT const QMetaObject AddContactWindow::staticMetaObject = { {
@@ -123,6 +136,13 @@ int AddContactWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         _id -= 3;
     }
     return _id;
+}
+
+// SIGNAL 0
+void AddContactWindow::sendMessage(QByteArray _t1)
+{
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
+    QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

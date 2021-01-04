@@ -13,7 +13,41 @@ SignUpWindow::~SignUpWindow()
 {
     delete ui;
 }
+bool SignUpWindow::CheckCredentials(){
+    QString login = ui->loginTextEdit->toPlainText();
+    QString nrGG = ui->nrGGTextEdit->toPlainText();
+    QString password = ui->passTextEdit->toPlainText();
+    bool result=true;
+    QString errorMessage;
+    if(login.length()>12 || login.length()<3){
+        result=false;
+        errorMessage="Dlugosc loginu powinna wynosic miedzy 3 a 12 znakami!\n";
 
+    }
+    else if(nrGG.length()>12||nrGG.length()<4){
+        result=false;
+        errorMessage="Dlugosc numeru GG powinna wynosic miedzy 4 a 12 znakami!\n";
+
+    }
+    else if(password.length()>16||password.length()<4){
+        result=false;
+        errorMessage="Dlugosc hasla powinna wynosic miedzy 4 a 16 znakami!\n";
+    }
+    if(!result){
+
+        infoDialog = new InfoDialog(this);
+
+        infoDialog->setLabelText(errorMessage);
+        infoDialog->adjustSize();
+        infoDialog->show();
+        return result;
+
+    }
+
+    return true;
+
+
+}
 void SignUpWindow::on_signUpButton_clicked()
 {
     QString msg = "SIGN_UP:";
@@ -22,8 +56,8 @@ void SignUpWindow::on_signUpButton_clicked()
     QString login = ui->loginTextEdit->toPlainText();
     QString nrGG = ui->nrGGTextEdit->toPlainText();
     QString password = ui->passTextEdit->toPlainText();
-
-    if(re.indexIn(login)<0 && re.indexIn(password)<0 && re2.indexIn(nrGG)<0)
+    bool lengthCorrectness=CheckCredentials();
+    if(re.indexIn(login)<0 && re.indexIn(password)<0 && re2.indexIn(nrGG)<0&&lengthCorrectness)
     {
         if(tcpSocket->state() != QAbstractSocket::ConnectedState){
             tcpSocket->connectToHost("127.0.0.1", 1234);
@@ -45,6 +79,9 @@ void SignUpWindow::on_signUpButton_clicked()
             infoDialog->setLabelText("Brak połączenia z serwerem");
             infoDialog->show();
         }
+
+    }
+    else if(!lengthCorrectness){
 
     }
     else if (re2.indexIn(nrGG)>=0)
