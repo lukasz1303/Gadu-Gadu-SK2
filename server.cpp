@@ -420,9 +420,19 @@ int main(int argc, char* argv[])
    
    memset(&server_address, 0, sizeof(struct sockaddr));
    server_address.sin_family = AF_INET;
-   server_address.sin_addr.s_addr = htonl(INADDR_ANY);
-   server_address.sin_port = htons(SERVER_PORT);
-
+   
+    if(argc>2){
+        server_address.sin_addr.s_addr = inet_addr(argv[2]);
+   } else {
+        server_address.sin_addr.s_addr = htonl(INADDR_ANY);
+   }
+   
+   if(argc>1){
+        server_address.sin_port = htons(atoi(argv[1]));
+   } else {
+        server_address.sin_port = htons(SERVER_PORT);
+   }
+  
    server_socket_descriptor = socket(AF_INET, SOCK_STREAM, 0);
    if (server_socket_descriptor < 0)
    {

@@ -16,8 +16,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     serverselect.cpp \
-    signupwindow.cpp \
-    user.cpp
+    signupwindow.cpp
 
 HEADERS += \
     addcontactwindow.h \
@@ -26,8 +25,7 @@ HEADERS += \
     loginwindow.h \
     mainwindow.h \
     serverselect.h \
-    signupwindow.h \
-    user.h
+    signupwindow.h
 
 FORMS += \
     addcontactwindow.ui \

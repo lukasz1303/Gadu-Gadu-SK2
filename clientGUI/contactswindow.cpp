@@ -43,6 +43,7 @@ void ContactsWindow::on_addButton_clicked()
 
     if (addContactWindow == NULL || addContactWindow->isHidden()){
         addContactWindow = new AddContactWindow(this);
+        addContactWindow->setMyGG(myGG);
         addContactWindow->show();
     }
 }
@@ -55,7 +56,6 @@ void ContactsWindow::readData(){
         qDebug() << buf;
 
         if (strncmp(buf, "CONTACT",7) == 0){
-            User *user = user->getInstance();
             std::string s = buf;
             s = s.substr(s.find("CONTACT")+8,s.length());
             QString name = QString::fromStdString(s.substr(0,s.find(":")));
@@ -139,12 +139,21 @@ void ContactsWindow::loadContacts()
     }
     if(tcpSocket->state() == QAbstractSocket::ConnectedState){
         QString msg = "GET_CONT:";
-        User *user = user->getInstance();
-        msg.append(QString::number(user->getNumberGG()));
+        msg.append(QString::number(myGG));
         msg.append('\n');
         tcpSocket->write(msg.toLatin1());
 
     }
+}
+
+int ContactsWindow::getMyGG() const
+{
+    return myGG;
+}
+
+void ContactsWindow::setMyGG(int value)
+{
+    myGG = value;
 }
 
 QString ContactsWindow::getMyName() const

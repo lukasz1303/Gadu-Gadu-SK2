@@ -21,13 +21,12 @@ void AddContactWindow::on_addButton_clicked()
     QByteArray msg = "ADD_CONT:";
     QByteArray name = ui->nameTextEdit->toPlainText().toUtf8();
     QByteArray number = ui->numberTextEdit->toPlainText().toUtf8();
-    User *user = user->getInstance();
-    if(number.toInt() == user->getNumberGG()){
+    if(number.toInt() == myGG){
         infoDialog = new InfoDialog(this);
         infoDialog->setLabelText("Podałeś własny numer GG");
         infoDialog->show();
     } else{
-        msg.append(QByteArray::number(user->getNumberGG()));
+        msg.append(QByteArray::number(myGG));
         msg.append(":");
         msg.append(name);
         msg.append(":");
@@ -40,4 +39,14 @@ void AddContactWindow::on_addButton_clicked()
 void AddContactWindow::on_cancelButton_clicked()
 {
     close();
+}
+
+int AddContactWindow::getMyGG() const
+{
+    return myGG;
+}
+
+void AddContactWindow::setMyGG(int value)
+{
+    myGG = value;
 }

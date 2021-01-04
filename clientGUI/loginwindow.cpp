@@ -52,14 +52,13 @@ void LoginWindow::readData(){
     qDebug() << buf;
 
     if (strncmp(buf, "SIGN_IN:OK",10) == 0){
-        User *user = user->getInstance();
         std::string s = buf;
-        user->setNumberGG(std::stoi(s.substr(s.find("SIGN_IN:OK:") + strlen("SIGN_IN:OK:"))));
         hide();
         disconnect(tcpSocket,&QIODevice::readyRead,0,0);
         contactsWindows = new ContactsWindow(this);
-        contactsWindows->setSocket(tcpSocket);
+        contactsWindows->setMyGG(std::stoi(s.substr(s.find("SIGN_IN:OK:") + strlen("SIGN_IN:OK:"))));
         contactsWindows->setMyName(login);
+        contactsWindows->setSocket(tcpSocket);
         contactsWindows->show();
     } else if(strcmp(buf, "SIGN_IN:ERROR") == 0){
         infoDialog = new InfoDialog(this);

@@ -5,7 +5,6 @@
 #include <QtDebug>
 #include <QtNetwork>
 #include "infodialog.h"
-#include "user.h"
 
 namespace Ui {
 class AddContactWindow;
@@ -18,6 +17,8 @@ class AddContactWindow : public QMainWindow
 public:
     explicit AddContactWindow(QWidget *parent = nullptr);
     ~AddContactWindow();
+    int getMyGG() const;
+    void setMyGG(int value);
 
 private slots:
     void on_addButton_clicked();
@@ -30,6 +31,7 @@ private:
     Ui::AddContactWindow *ui;
     InfoDialog *infoDialog;
     char buf[100];
+    int myGG;
 };
 
 #endif // ADDCONTACTWINDOW_H

@@ -11,7 +11,7 @@
 #include <netdb.h>
 #include <arpa/inet.h>
 #include <netinet/in.h>
-#include"mainwindow.h"
+#include "mainwindow.h"
 namespace Ui {
 class serverselect;
 }

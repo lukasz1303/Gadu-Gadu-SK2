@@ -57,12 +57,12 @@ void serverselect::connectViaIpOrDomain(){
        }
    if(tcpSocket->state() != QAbstractSocket::ConnectedState){
        infoDialog = new InfoDialog(this);
-       infoDialog->setLabelText("Nie mozna polaczyc sie z podanym hostem!");
+       infoDialog->setLabelText("Nie można połączyć się z podanym hostem!");
        infoDialog->show();
    }
    else{
        infoDialog = new InfoDialog(this);
-       infoDialog->setLabelText("Pomyslna zmiana serwera!");
+       infoDialog->setLabelText("Pomyślna zmiana serwera!");
        infoDialog->show();
 
        this->hostname=ipstr;
@@ -74,7 +74,7 @@ void serverselect::connectViaIpOrDomain(){
     }
    else{
         infoDialog = new InfoDialog(this);
-        infoDialog->setLabelText("Nie zgadza sie numer portu!");
+        infoDialog->setLabelText("Nie zgadza się numer portu!");
         infoDialog->show();
 
     }

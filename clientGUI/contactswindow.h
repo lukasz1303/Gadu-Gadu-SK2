@@ -22,6 +22,8 @@ public:
     void setSocket(QTcpSocket *socket);
     QString getMyName() const;
     void setMyName(const QString &value);
+    int getMyGG() const;
+    void setMyGG(int value);
 
 private slots:
     void on_quitButton_clicked();
@@ -44,6 +46,7 @@ private:
     std::vector<QString> names;
     std::vector<MainWindow *> mainWindows;
     QString myName;
+    int myGG;
 
 };
 

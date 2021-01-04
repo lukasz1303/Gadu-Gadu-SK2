@@ -9,7 +9,6 @@
 #include "contactswindow.h"
 #include "signupwindow.h"
 #include "infodialog.h"
-#include "user.h"
 #include "serverselect.h"
 namespace Ui {
 class LoginWIndow;
