@@ -15,6 +15,7 @@ SOURCES += \
     loginwindow.cpp \
     main.cpp \
     mainwindow.cpp \
+    serverselect.cpp \
     signupwindow.cpp \
     user.cpp
 
@@ -24,6 +25,7 @@ HEADERS += \
     infodialog.h \
     loginwindow.h \
     mainwindow.h \
+    serverselect.h \
     signupwindow.h \
     user.h
 
@@ -33,6 +35,7 @@ FORMS += \
     infodialog.ui \
     loginwindow.ui \
     mainwindow.ui \
+    serverselect.ui \
     signupwindow.ui
 
 # Default rules for deployment.

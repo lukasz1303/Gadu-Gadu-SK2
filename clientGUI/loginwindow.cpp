@@ -11,7 +11,7 @@ LoginWindow::LoginWindow(QWidget *parent) :
     typedef void (QAbstractSocket::*QAbstractSocketErrorSignal)(QAbstractSocket::SocketError);
     connect(tcpSocket, static_cast<QAbstractSocketErrorSignal>(&QAbstractSocket::error), this, &LoginWindow::displayError);   
     ui->passwordLineEdit->setEchoMode(QLineEdit::Password);
-    tcpSocket->connectToHost("127.0.0.1", 1234);
+    serverSelect=(new serverselect(this));
 }
 
 LoginWindow::~LoginWindow()
@@ -76,7 +76,7 @@ void LoginWindow::readData(){
 void LoginWindow::on_signInButton_clicked()
 {
     if(tcpSocket->state() != QAbstractSocket::ConnectedState){
-        tcpSocket->connectToHost("127.0.0.1", 1234);
+        tcpSocket->connectToHost(serverSelect->hostname,serverSelect->portnumber);
         tcpSocket->waitForConnected(500);
     }
     if(tcpSocket->state() == QAbstractSocket::ConnectedState){
@@ -107,6 +107,7 @@ void LoginWindow::on_signUpButton_clicked()
     signUpWindow = new SignUpWindow(this);
     disconnect(tcpSocket,&QIODevice::readyRead,0,0);
     signUpWindow->setSocket(tcpSocket);
+    signUpWindow->serverSelect=this->serverSelect;
     signUpWindow->show();
     hide();
 }
@@ -117,3 +118,11 @@ void LoginWindow::showWindow()
     connect(tcpSocket, &QIODevice::readyRead, this,&LoginWindow::readData);
 }
 
+
+void LoginWindow::on_pushButton_clicked()
+{
+
+
+    serverSelect->show();
+
+}

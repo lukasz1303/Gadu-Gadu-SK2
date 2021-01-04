@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include <QtNetwork>
 #include "infodialog.h"
-
+#include "serverselect.h"
 namespace Ui {
 class SignUpWindow;
 }
@@ -17,10 +17,15 @@ public:
     explicit SignUpWindow(QWidget *parent = nullptr);
     ~SignUpWindow();
     void setSocket(QTcpSocket *socket);
+    serverselect *serverSelect;
     bool CheckCredentials();
 private slots:
     void on_signUpButton_clicked();
     void readData();
+
+    void on_changeserwer_clicked();
+
+    void on_return_2_clicked();
 
 signals:
     void showParent();

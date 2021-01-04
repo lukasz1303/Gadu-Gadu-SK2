@@ -10,7 +10,7 @@
 #include "signupwindow.h"
 #include "infodialog.h"
 #include "user.h"
-
+#include "serverselect.h"
 namespace Ui {
 class LoginWIndow;
 }
@@ -21,6 +21,7 @@ class LoginWindow : public QMainWindow
 
 public:
     QString login;
+    serverselect *serverSelect;
     explicit LoginWindow(QWidget *parent = nullptr);
     ~LoginWindow();
 
@@ -29,6 +30,8 @@ private slots:
     void readData();
     void on_signInButton_clicked();
     void on_signUpButton_clicked();
+
+    void on_pushButton_clicked();
 
 public slots:
     void showWindow();

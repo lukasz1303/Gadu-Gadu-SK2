@@ -60,7 +60,7 @@ void SignUpWindow::on_signUpButton_clicked()
     if(re.indexIn(login)<0 && re.indexIn(password)<0 && re2.indexIn(nrGG)<0&&lengthCorrectness)
     {
         if(tcpSocket->state() != QAbstractSocket::ConnectedState){
-            tcpSocket->connectToHost("127.0.0.1", 1234);
+            tcpSocket->connectToHost(serverSelect->hostname, serverSelect->portnumber);
             tcpSocket->waitForConnected(500);
         }
         if(tcpSocket->state() == QAbstractSocket::ConnectedState){
@@ -120,4 +120,17 @@ void SignUpWindow::readData(){
         infoDialog->setLabelText("Rejestracja zakończona niepowodzeniem");
         infoDialog->show();
     }
+}
+
+void SignUpWindow::on_changeserwer_clicked()
+{
+
+
+    this->serverSelect->show();
+}
+
+void SignUpWindow::on_return_2_clicked()
+{
+    hide();
+    emit showParent();
 }

@@ -184,8 +184,8 @@
      <rect>
       <x>190</x>
       <y>230</y>
-      <width>80</width>
-      <height>24</height>
+      <width>111</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="text">
@@ -217,10 +217,10 @@
    <widget class="QPushButton" name="signUpButton">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>10</x>
       <y>290</y>
-      <width>80</width>
-      <height>24</height>
+      <width>101</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="text">
@@ -277,6 +277,19 @@
      <font>
       <pointsize>14</pointsize>
      </font>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>290</y>
+      <width>101</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>zmien serwer</string>
     </property>
    </widget>
   </widget>
