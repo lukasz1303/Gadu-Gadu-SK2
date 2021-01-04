@@ -113,6 +113,7 @@ void ContactsWindow::readData(){
             infoDialog->setLabelText("Dodano znajomego");
             infoDialog->show();
             numbersGG.clear();
+            names.clear();
             ui->listWidget->clear();
             loadContacts();
             addContactWindow->hide();
@@ -172,6 +173,7 @@ void ContactsWindow::sendMessageToServer(QByteArray buf)
 void ContactsWindow::on_refreshButton_clicked()
 {
     numbersGG.clear();
+    names.clear();
     ui->listWidget->clear();
     loadContacts();
 }
