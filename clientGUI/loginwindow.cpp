@@ -90,6 +90,7 @@ void LoginWindow::on_signInButton_clicked()
             msg.append(login);
             msg.append(":");
             msg.append(password);
+            msg.append('\n');
             tcpSocket->write(msg.toLatin1());
         }
         else

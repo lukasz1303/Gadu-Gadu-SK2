@@ -38,6 +38,7 @@ void SignUpWindow::on_signUpButton_clicked()
             msg.append(ui->passTextEdit->toPlainText());
             msg.append(":");
             msg.append(ui->nrGGTextEdit->toPlainText());
+            msg.append('\n');
             tcpSocket->write(msg.toLatin1());
         }else {
             infoDialog = new InfoDialog(this);

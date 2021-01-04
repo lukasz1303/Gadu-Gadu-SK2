@@ -87,7 +87,7 @@ void ContactsWindow::readData(){
             qDebug() << index;
             qDebug() << numbersGG.at(index);
             QString msg = QString::fromStdString(s.substr(s.find(":")+1,s.length()));
-            msg.prepend(": ");
+            msg.prepend(":");
             msg.prepend(names.at(index));
             mainWindows.at(index)->setText(msg.toUtf8());
 
@@ -140,6 +140,7 @@ void ContactsWindow::loadContacts()
         QString msg = "GET_CONT:";
         User *user = user->getInstance();
         msg.append(QString::number(user->getNumberGG()));
+        msg.append('\n');
         tcpSocket->write(msg.toLatin1());
 
     }
@@ -163,6 +164,7 @@ void ContactsWindow::sendMessageToServer(QByteArray buf)
         tcpSocket->waitForConnected(500);
     }
     if(tcpSocket->state() == QAbstractSocket::ConnectedState){
+        buf.append("\n");
         tcpSocket->write(buf);
     }
 }

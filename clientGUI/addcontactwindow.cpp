@@ -32,7 +32,6 @@ void AddContactWindow::on_addButton_clicked()
         msg.append(name);
         msg.append(":");
         msg.append(number);
-        //tcpSocket->write(msg.toLatin1());
         emit sendMessage(msg);
     }
 

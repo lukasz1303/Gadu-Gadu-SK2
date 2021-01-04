@@ -50,21 +50,38 @@ void *ThreadBehavior(void *t_data)
 {
     pthread_detach(pthread_self());
     struct thread_data_t *th_data = (struct thread_data_t*)t_data;
-    char buff[255];
+    char buff1[255];
     clientCount++;
     int bytes;
     int ggsender;
     char name[32];
+    std::string stringBuff;
+    std::string oneChar;
+    bool shouldBreak = false;
     while(1){
     
-        memset(buff,0,sizeof(buff));
-        bytes = read((*th_data).socket, buff, 255);
-        if (bytes == 0){
-            printf("Client closed, socket = %d\n", (*th_data).socket);
+        stringBuff = "";
+        memset(buff1,0,sizeof(buff1)); 
+        while(1){
+                bytes = read((*th_data).socket, buff1, 1);
+                if (bytes == 0){
+                    printf("Client closed, socket = %d\n", (*th_data).socket);
+                    shouldBreak = true;
+                    break; 
+                }
+                if(strncmp(buff1,"\n",1) == 0 || strncmp(buff1,"\0",1) == 0){
+                    break;
+                }
+            stringBuff.push_back(buff1[0]);
+        }
+        if (shouldBreak){
             break;
         }
-        //printf("read %d bytes\n", bytes);
-        printf("%s\n", buff);
+
+        char buff[stringBuff.length()+1];
+        memset(buff,0,sizeof(buff)); 
+        strncpy(buff,stringBuff.c_str(),stringBuff.length());
+        buff[stringBuff.length()]='\0';
         
         if(strncmp(buff,"SIGN_UP",7)==0){
             pthread_mutex_lock(&SING_UP_MUTEX);
@@ -87,6 +104,7 @@ void *ThreadBehavior(void *t_data)
             }
             pthread_mutex_unlock(&SING_UP_MUTEX);
         }
+        
         
         if(strncmp(buff,"SIGN_IN",7)==0){
             std::ifstream usersFile;

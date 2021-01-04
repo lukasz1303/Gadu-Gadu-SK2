@@ -76,10 +76,10 @@ void MainWindow::on_sendButton_clicked()
 {
     QByteArray msg =ui->textEdit->toMarkdown().toUtf8();
     QByteArray msg2=msg;
-    msg2.prepend(":");
+    msg2.prepend(": ");
     msg2.prepend(std::to_string(getReceiver()).c_str());
     msg2.prepend("SEND_MSG:");
-    msg.prepend(":");
+    msg.prepend(": ");
     msg.prepend(this->myname.QString::toUtf8());
     msg = msg.left(msg.indexOf("\n"));
 
