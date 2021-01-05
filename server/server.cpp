@@ -16,7 +16,7 @@
 #include <string>
 
 #define SERVER_PORT 1234
-#define QUEUE_SIZE 5
+#define QUEUE_SIZE 100
 static unsigned int clientCount = 0;
 typedef struct{
     struct sockaddr_in address;
@@ -171,7 +171,6 @@ void *ThreadBehavior(void *t_data)
         }
         
         if(strncmp(buff,"ADD_CONT",8)==0){
-
             
             std::string s = buff;
             s = s.substr(s.find(":")+1,s.length());
@@ -218,7 +217,6 @@ void *ThreadBehavior(void *t_data)
                     } else {
                         char buff2[20] = "ADD_CONT:NO_SIGNED\n";
                         write((*th_data).socket, buff2, strlen(buff2));
-                        std::cout<< buff2 << std::endl;
                     }
                     
                 }
@@ -262,7 +260,7 @@ void *ThreadBehavior(void *t_data)
                     }
                     
             } else {
-                printf("Nie można otworzyć pliku \"users\"\n");
+                printf("Nie można otworzyć pliku z kontaktami\n");
             }
             
             contactsFile.close();
@@ -277,8 +275,7 @@ void *ThreadBehavior(void *t_data)
             
             int ggrecipient=std::stoi(GGReceivernr);
             std::string savetohistory;
-            
-            
+             
             s = s.substr(s.find(":")+1,s.length());
             s = s.substr(0,s.find("\n"));
             savetohistory=s;
@@ -300,10 +297,7 @@ void *ThreadBehavior(void *t_data)
                         char result_array[result.length()+1];
                         strncpy(result_array, result.c_str(), sizeof(result_array));
                         result_array[result.length()] = '\n';
-                        
-                        
                         result_array[result.length()+1] = '\0';
-                        std::cout << result_array << std::endl;
                         send_message(result_array, ggrecipient);
                     }
                 }
@@ -341,7 +335,6 @@ void *ThreadBehavior(void *t_data)
             s=s.substr(s.find(":")+1,s.length());
             int ggreciever=std::stoi(s.substr(0,s.find(":")));
             s=s.substr(s.find(":")+1,s.length());
-            //int numberofmessages=std::stoi(s.substr(0,s.length()));
             
             std::string filename;
             if(ggreciever>ggsender){

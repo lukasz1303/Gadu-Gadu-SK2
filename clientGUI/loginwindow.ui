@@ -81,9 +81,9 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>150</x>
+      <x>140</x>
       <y>10</y>
-      <width>121</width>
+      <width>161</width>
       <height>51</height>
      </rect>
     </property>
@@ -93,7 +93,7 @@
      </font>
     </property>
     <property name="text">
-     <string>Gadu-Gadu</string>
+     <string>Gadu-Gadu </string>
     </property>
    </widget>
    <widget class="QTextEdit" name="loginTextEdit">
@@ -198,7 +198,7 @@
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>290</x>
+      <x>300</x>
       <y>10</y>
       <width>51</width>
       <height>51</height>
