@@ -26,7 +26,7 @@ bool SignUpWindow::CheckCredentials(){
     }
     else if(nrGG.length()>12||nrGG.length()<4){
         result=false;
-        errorMessage="Dlugosc numeru GG powinna wynosic miedzy 4 a 12 znakami!\n";
+        errorMessage="Dlugosc numeru GG powinna wynosic miedzy 4 a 12 cyframi!\n";
 
     }
     else if(password.length()>16||password.length()<4){
@@ -74,10 +74,6 @@ void SignUpWindow::on_signUpButton_clicked()
             msg.append(ui->nrGGTextEdit->toPlainText());
             msg.append('\n');
             tcpSocket->write(msg.toLatin1());
-        }else {
-            infoDialog = new InfoDialog(this);
-            infoDialog->setLabelText("Brak połączenia z serwerem");
-            infoDialog->show();
         }
 
     }

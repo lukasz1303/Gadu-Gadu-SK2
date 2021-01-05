@@ -50,7 +50,7 @@ void *ThreadBehavior(void *t_data)
 {
     pthread_detach(pthread_self());
     struct thread_data_t *th_data = (struct thread_data_t*)t_data;
-    char buff1[255];
+    char buff1[1000];
     clientCount++;
     int bytes;
     int ggsender;
@@ -114,7 +114,7 @@ void *ThreadBehavior(void *t_data)
             bool finded = false;
             bool already_logged=false;
             std::string ret;
-            char buff2[50]; 
+            char buff2[1000]; 
             if (usersFile.is_open()){
                 std::string line;
                 while (getline(usersFile,line)){
@@ -237,7 +237,7 @@ void *ThreadBehavior(void *t_data)
             std::ifstream contactsFile;
             contactsFile.open(contactsFileName);
             std::string line;  
-            char buff2[100];
+            char buff2[1000];
             if (contactsFile.is_open()){
                 while (getline(contactsFile,line)){
                     memset(buff2,0,sizeof(buff2));
@@ -356,7 +356,7 @@ void *ThreadBehavior(void *t_data)
             pthread_mutex_lock(&CHAT_MESSAGES_MUTEX);
             historyFile.open(chathistoryFileName);
             std::string line;  
-            char buff2[100];
+            char buff2[1000];
             if(historyFile.is_open()){
             
                      while (getline(historyFile,line)){

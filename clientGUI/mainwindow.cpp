@@ -108,10 +108,10 @@ void MainWindow::on_sendButton_clicked()
     msg2.prepend("SEND_MSG:");
     msg.prepend(": ");
     msg.prepend(this->myname.QString::toUtf8());
-    msg = msg.left(msg.indexOf("\n"));
+    //msg = msg.left(msg.indexOf("\n"));
 
     emit sendMessage(msg2);
-
+    msg.replace("\n", "");
     ui->textBrowser->insertPlainText(msg);
     ui->textBrowser->insertPlainText("\n");
     ui->textBrowser->ensureCursorVisible();

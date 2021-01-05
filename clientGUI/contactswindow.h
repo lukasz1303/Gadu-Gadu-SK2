@@ -7,6 +7,7 @@
 #include "mainwindow.h"
 #include "addcontactwindow.h"
 #include "infodialog.h"
+#include "serverselect.h"
 
 namespace Ui {
 class ContactsWindow;
@@ -24,6 +25,7 @@ public:
     void setMyName(const QString &value);
     int getMyGG() const;
     void setMyGG(int value);
+    serverselect *serverSelect;
 
 private slots:
     void on_quitButton_clicked();
@@ -41,7 +43,7 @@ private:
     QTcpSocket *tcpSocket;
     InfoDialog *infoDialog;
     AddContactWindow *addContactWindow = NULL;
-    char buf[100];
+    char buf[500];
     std::vector<int> numbersGG;
     std::vector<QString> names;
     std::vector<MainWindow *> mainWindows;

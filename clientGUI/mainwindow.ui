@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>365</width>
-    <height>365</height>
+    <height>415</height>
    </rect>
   </property>
   <property name="palette">
@@ -87,7 +87,7 @@
       <x>30</x>
       <y>10</y>
       <width>301</width>
-      <height>201</height>
+      <height>221</height>
      </rect>
     </property>
     <property name="palette">
@@ -132,7 +132,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>270</y>
+      <y>320</y>
       <width>251</width>
       <height>51</height>
      </rect>
@@ -148,9 +148,9 @@
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>220</y>
+      <y>240</y>
       <width>301</width>
-      <height>41</height>
+      <height>61</height>
      </rect>
     </property>
     <property name="palette">
@@ -194,8 +194,8 @@
    <widget class="QPushButton" name="closeButton">
     <property name="geometry">
      <rect>
-      <x>270</x>
-      <y>290</y>
+      <x>280</x>
+      <y>340</y>
       <width>81</width>
       <height>31</height>
      </rect>
@@ -207,8 +207,8 @@
    <widget class="QLabel" name="textCounter">
     <property name="geometry">
      <rect>
-      <x>280</x>
-      <y>260</y>
+      <x>270</x>
+      <y>300</y>
       <width>67</width>
       <height>17</height>
      </rect>

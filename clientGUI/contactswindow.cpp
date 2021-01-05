@@ -52,7 +52,7 @@ void ContactsWindow::readData(){
 
     while(tcpSocket->canReadLine()){
         memset(buf,0,sizeof(buf));
-        tcpSocket->readLine(buf,100);
+        tcpSocket->readLine(buf,500);
 
 
         if (strncmp(buf, "CONTACT",7) == 0){
@@ -133,7 +133,7 @@ void ContactsWindow::readData(){
 void ContactsWindow::loadContacts()
 {
     if(tcpSocket->state() != QAbstractSocket::ConnectedState){
-        tcpSocket->connectToHost("127.0.0.1", 1234);
+        tcpSocket->connectToHost(serverSelect->hostname, serverSelect->portnumber);
         tcpSocket->waitForConnected(500);
     }
     if(tcpSocket->state() == QAbstractSocket::ConnectedState){
@@ -169,10 +169,11 @@ void ContactsWindow::sendMessageToServer(QByteArray buf)
 {
 
     if(tcpSocket->state() != QAbstractSocket::ConnectedState){
-        tcpSocket->connectToHost("127.0.0.1", 1234);
+        tcpSocket->connectToHost(serverSelect->hostname, serverSelect->portnumber);
         tcpSocket->waitForConnected(500);
     }
     if(tcpSocket->state() == QAbstractSocket::ConnectedState){
+        buf = buf.replace("\n", "");
         buf.append("\n");
         tcpSocket->write(buf);
     }

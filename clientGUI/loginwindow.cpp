@@ -57,6 +57,7 @@ void LoginWindow::readData(){
         contactsWindows = new ContactsWindow(this);
         contactsWindows->setMyGG(std::stoi(s.substr(s.find("SIGN_IN:OK:") + strlen("SIGN_IN:OK:"))));
         contactsWindows->setMyName(login);
+        contactsWindows->serverSelect=this->serverSelect;
         contactsWindows->setSocket(tcpSocket);
         contactsWindows->show();
     } else if(strcmp(buf, "SIGN_IN:ERROR") == 0){
