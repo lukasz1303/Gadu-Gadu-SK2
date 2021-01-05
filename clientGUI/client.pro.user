@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.13.3, 2021-01-04T19:22:27. -->
+<!-- Written by QtCreator 4.13.3, 2021-01-05T15:48:47. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
-  <value type="QByteArray">{039da7c6-183a-4658-b92f-93bb678c6c1f}</value>
+  <value type="QByteArray">{3f178768-7cae-4a8d-b228-5ee2715e4b2e}</value>
  </data>
  <data>
   <variable>ProjectExplorer.Project.ActiveTarget</variable>
@@ -94,8 +94,8 @@
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.0">
     <value type="bool">true</value>
     <value type="int" key="EnableQmlDebugging">0</value>
-    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/home/linuxmint/build-zad1-Desktop_Qt_5_15_2_GCC_64bit-Debug</value>
-    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory.shadowDir">/home/linuxmint/build-zad1-Desktop_Qt_5_15_2_GCC_64bit-Debug</value>
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/home/jan/Desktop/github/Gadu-Gadu-SK2/build-client-Desktop_Qt_5_15_2_GCC_64bit-Debug</value>
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory.shadowDir">/home/jan/Desktop/github/Gadu-Gadu-SK2/build-client-Desktop_Qt_5_15_2_GCC_64bit-Debug</value>
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
       <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
@@ -146,8 +146,8 @@
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.1">
     <value type="bool">true</value>
     <value type="int" key="EnableQmlDebugging">2</value>
-    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/home/linuxmint/build-zad1-Desktop_Qt_5_15_2_GCC_64bit-Release</value>
-    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory.shadowDir">/home/linuxmint/build-zad1-Desktop_Qt_5_15_2_GCC_64bit-Release</value>
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/home/jan/Desktop/github/Gadu-Gadu-SK2/build-client-Desktop_Qt_5_15_2_GCC_64bit-Release</value>
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory.shadowDir">/home/jan/Desktop/github/Gadu-Gadu-SK2/build-client-Desktop_Qt_5_15_2_GCC_64bit-Release</value>
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
       <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
@@ -198,8 +198,8 @@
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.2">
     <value type="bool">true</value>
     <value type="int" key="EnableQmlDebugging">0</value>
-    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/home/linuxmint/build-zad1-Desktop_Qt_5_15_2_GCC_64bit-Profile</value>
-    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory.shadowDir">/home/linuxmint/build-zad1-Desktop_Qt_5_15_2_GCC_64bit-Profile</value>
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/home/jan/Desktop/github/Gadu-Gadu-SK2/build-client-Desktop_Qt_5_15_2_GCC_64bit-Profile</value>
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory.shadowDir">/home/jan/Desktop/github/Gadu-Gadu-SK2/build-client-Desktop_Qt_5_15_2_GCC_64bit-Profile</value>
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
       <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
@@ -323,8 +323,8 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/linuxmint/Pulpit/Gadu-Gadu/clientGUI/client.pro</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/linuxmint/Pulpit/Gadu-Gadu/clientGUI/client.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/jan/Desktop/github/Gadu-Gadu-SK2/clientGUI/client.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/jan/Desktop/github/Gadu-Gadu-SK2/clientGUI/client.pro</value>
     <value type="QString" key="RunConfiguration.Arguments"></value>
     <value type="bool" key="RunConfiguration.Arguments.multi">false</value>
     <value type="QString" key="RunConfiguration.OverrideDebuggerStartup"></value>
@@ -335,7 +335,7 @@
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
     <value type="QString" key="RunConfiguration.WorkingDirectory"></value>
-    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/linuxmint/build-zad1-Desktop_Qt_5_15_2_GCC_64bit-Debug</value>
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/jan/Desktop/github/Gadu-Gadu-SK2/build-client-Desktop_Qt_5_15_2_GCC_64bit-Debug</value>
    </valuemap>
    <value type="int" key="ProjectExplorer.Target.RunConfigurationCount">1</value>
   </valuemap>

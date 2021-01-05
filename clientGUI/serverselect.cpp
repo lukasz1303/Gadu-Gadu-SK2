@@ -29,7 +29,6 @@ void serverselect::connectViaIpOrDomain(){
     struct addrinfo hints, *res, *p;
     int status;
     char ipstr[30];
-    qDebug()<<(this->hostname);
     QRegExp re("[^0-9]");
     if(re.indexIn(ui->portnumber->text())<0){
         portNumber=ui->portnumber->text().toInt();
@@ -67,7 +66,6 @@ void serverselect::connectViaIpOrDomain(){
 
        this->hostname=ipstr;
        this->portnumber=portNumber;
-       qDebug()<<(ipstr);
        tcpSocket->disconnectFromHost();
 
    }

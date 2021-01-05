@@ -366,7 +366,6 @@ void *ThreadBehavior(void *t_data)
                         s.append(":");
                         s.append(line);
                         strncpy(buff2,s.c_str(),sizeof(buff2));
-                        printf("%s",s.c_str());
                         buff2[s.length()]='\n';
                         buff2[s.length()+1]='\0';
                         write((*th_data).socket, buff2, strlen(buff2));

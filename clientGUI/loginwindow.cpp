@@ -43,13 +43,12 @@ void LoginWindow::displayError(QAbstractSocket::SocketError socketError){
         infoDialog->show();
     }
 
-    qDebug() << socketError;
+    //qDebug() << socketError;//ten zostawie
 }
 
 void LoginWindow::readData(){
     int n = tcpSocket->readLine(buf,100);
     buf[n] = 0;
-    qDebug() << buf;
 
     if (strncmp(buf, "SIGN_IN:OK",10) == 0){
         std::string s = buf;

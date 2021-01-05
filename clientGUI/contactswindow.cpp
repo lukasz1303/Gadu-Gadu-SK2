@@ -53,7 +53,7 @@ void ContactsWindow::readData(){
     while(tcpSocket->canReadLine()){
         memset(buf,0,sizeof(buf));
         tcpSocket->readLine(buf,100);
-        qDebug() << buf;
+
 
         if (strncmp(buf, "CONTACT",7) == 0){
             std::string s = buf;
@@ -84,8 +84,7 @@ void ContactsWindow::readData(){
             QString senderGG = QString::fromStdString(s.substr(0,s.find(":")));
 
             int index = std::distance(numbersGG.begin() ,std::find(numbersGG.begin(), numbersGG.end(), senderGG.toInt()));
-            qDebug() << index;
-            qDebug() << numbersGG.at(index);
+
             QString msg = QString::fromStdString(s.substr(s.find(":")+1,s.length()));
             msg.prepend(":");
             msg.prepend(names.at(index));
@@ -100,7 +99,7 @@ void ContactsWindow::readData(){
             int nr1;
             nr1=std::stoi(s.substr(0,s.find(":")));
             s=s.substr(s.find(":"),s.length());
-            qDebug()<<nr1;
+
             if(nr1==mainWindows.at(index)->getReceiver()){
                 s=(names[index]).toStdString()+s;
             }
@@ -168,7 +167,7 @@ void ContactsWindow::setMyName(const QString &value)
 
 void ContactsWindow::sendMessageToServer(QByteArray buf)
 {
-    qDebug() << buf;
+
     if(tcpSocket->state() != QAbstractSocket::ConnectedState){
         tcpSocket->connectToHost("127.0.0.1", 1234);
         tcpSocket->waitForConnected(500);
